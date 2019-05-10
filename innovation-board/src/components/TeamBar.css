@@ -1,0 +1,43 @@
+@import './Innovation.css';
+
+.TeamBar {
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 5px;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.FormLabel {
+    font-family: Trim,'Now-Bold',Oscine;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 25px;
+    color: #242d34;
+    padding: 10px;
+    display: block;
+  }
+  
+.FormDiv {
+    /*background: #242d34;*/
+    background:  #f8fc00;
+    width: 300px;
+    align-items: center;
+    text-align: center;
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.InnovationDiv {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Popup {
+    border-radius: 5px;
+}
