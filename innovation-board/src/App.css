@@ -45,6 +45,14 @@
   justify-content: center;
 }
 
+.WhiteLine {
+  width: 100%;
+  background: white;
+  height: 1vh;
+  display: block;
+  
+}
+
 @font-face {
   font-family: 'Now-Bold';
   font-style: normal;

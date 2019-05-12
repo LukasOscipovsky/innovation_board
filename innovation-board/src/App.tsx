@@ -11,6 +11,7 @@ const App: React.FC = () => {
           <p className="DAZN-title">DAZN Košice - Innovation Board</p> 
         <img src={logo} className="DAZN-logo" alt="logo" />
       </header>
+      <div className ="WhiteLine"/>
       <div className="MainDiv">
         <TeamBar/>
       </div>

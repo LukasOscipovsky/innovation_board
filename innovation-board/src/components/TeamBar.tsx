@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import Innovation from './Innovation';
 import InnovationDTO from '../data/InnovationDTO';
-import Modal from "react-native-modal";
 
 interface InnovationState {
     invs: Array<InnovationDTO>;
@@ -50,11 +47,6 @@ class TeamBar extends Component<{}, InnovationState> {
               <label className='FormLabel'>Rights Platform</label>
             </div>
             <div className='InnovationDiv'>
-            <Modal isVisible={this.state.isModalVisible}>
-                <Fab>
-                    <AddIcon onClick={this.handleClick.bind(this)} />
-                </Fab>
-            </Modal>
             </div>
           </div>
         );
