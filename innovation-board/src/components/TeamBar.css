@@ -2,8 +2,8 @@
 
 .TeamBar {
     padding: 5px;
-    border: 2px solid white;
-    border-radius: 5px;
+    /*border: 2px solid white;
+    border-radius: 5px;*/
     height: 10vh;
     display: flex;
     flex-direction: row;
@@ -31,8 +31,41 @@
     justify-content: center;
 }
 
-.InnovationDiv {
-    display:flex;
+.InnovationModal {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    width: 25%;
+    height: 40%;
+    border-radius: 10px;
+}
+
+.ModalTitle {
+    font-family: Trim,'Now-Bold',Oscine;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #242d34;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.InnovationTitle {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.InnovationDescription {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.ModalActions {
+    display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    margin-top: 25px;
 }

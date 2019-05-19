@@ -2,6 +2,9 @@ import React from 'react';
 import logo from './assets/DAZN-hero-updated.png';
 import './App.css';
 import TeamBar from './components/TeamBar';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme();
 
 const App: React.FC = () => {
   return (
@@ -12,9 +15,11 @@ const App: React.FC = () => {
         <img src={logo} className="DAZN-logo" alt="logo" />
       </header>
       <div className ="WhiteLine"/>
-      <div className="MainDiv">
-        <TeamBar/>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className="MainDiv">
+          <TeamBar/>
+        </div>
+      </MuiThemeProvider>
     </div>
   );
 }
