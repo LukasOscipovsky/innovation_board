@@ -3,13 +3,19 @@ import Innovation from './Innovation';
 
 interface TeamState {
   open: boolean;
+  name: string;
 }
 
-class TeamBar extends Component<{}, TeamState> {
+interface TeamProps {
+  name: string;
+}
+
+class TeamBar extends Component<TeamProps, TeamState> {
   constructor(props: any) {
     super(props);
       this.state = {
-        open: false
+        open: false,
+        name: this.props.name
       }
     }
   
@@ -25,7 +31,7 @@ class TeamBar extends Component<{}, TeamState> {
         return (
           <div className='TeamBar'>
             <div className='FormDiv'>
-              <label className='FormLabel'>Rights Platform</label>
+              <label className='FormLabel'>{this.state.name}</label>
               <div className="PlusDiv">
               </div>
             </div>

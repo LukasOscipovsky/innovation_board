@@ -17,7 +17,8 @@ const App: React.FC = () => {
       <div className ="WhiteLine"/>
       <MuiThemeProvider theme={theme}>
         <div className="MainDiv">
-          <TeamBar/>
+          <TeamBar name="Rights Platform"/>
+          <TeamBar name="Cms Componentisation"/>
         </div>
       </MuiThemeProvider>
     </div>

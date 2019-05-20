@@ -11,7 +11,7 @@
     font-family: Trim,'DAZN-Bold',Oscine;
     font-style: italic;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 20px;
     color: #242d34;
     padding: 10px;
     display: block;
@@ -28,6 +28,8 @@
     flex-wrap: wrap;
     border-radius: 6px;
     perspective: 200px;
+    overflow-x: visible;
+    box-shadow: 2px 3px 8px #000000;
 }
 
 .InnovationModal {
@@ -75,4 +77,7 @@
     width: 5vh;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    -moz-box-shadow:    1px 1px 5px 1px #000000;
+    -webkit-box-shadow: 1px 1px 5px 1px #000000;
+    box-shadow:         1px 1px 5px 1px #000000;
 }
