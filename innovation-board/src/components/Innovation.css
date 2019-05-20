@@ -15,7 +15,7 @@
 }
 
 .ModalTitle {
-    font-family: Trim,'Now-Bold',Oscine;
+    font-family: Trim,'DAZN-Bold',Oscine;
     font-style: bold;
     font-weight: 700;
     font-size: 20px;
@@ -38,7 +38,5 @@
 .ModalActions {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     margin-top: 25px;
 }

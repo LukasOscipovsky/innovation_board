@@ -2,15 +2,13 @@
 
 .TeamBar {
     padding: 5px;
-    /*border: 2px solid white;
-    border-radius: 5px;*/
     height: 10vh;
     display: flex;
     flex-direction: row;
 }
 
 .FormLabel {
-    font-family: Trim,'Now-Bold',Oscine;
+    font-family: Trim,'DAZN-Bold',Oscine;
     font-style: italic;
     font-weight: 700;
     font-size: 25px;
@@ -20,15 +18,16 @@
   }
   
 .FormDiv {
-    /*background: #242d34;*/
     background:  #f8fc00;
     width: 300px;
     align-items: center;
     text-align: center;
-    padding: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-radius: 6px;
+    perspective: 200px;
 }
 
 .InnovationModal {
@@ -43,7 +42,7 @@
 }
 
 .ModalTitle {
-    font-family: Trim,'Now-Bold',Oscine;
+    font-family: Trim,'DAZN-Bold',Oscine;
     font-style: bold;
     font-weight: 700;
     font-size: 20px;
@@ -68,4 +67,12 @@
     justify-content: center;
     align-items: center;
     margin-top: 25px;
+}
+
+.PlusDiv {
+    background: #343b3f;
+    align-self: stretch;
+    width: 5vh;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

@@ -2,6 +2,8 @@
 
 .App {
   text-align: center;
+  position: center;
+  display: block;
 }
 
 .App-logo {
@@ -16,7 +18,7 @@
 }
 
 .MainDiv {
-  background: #343b3f;
+  background: #242d34;
   position: absolute;
     width: 100%;
     height: 100%;
@@ -27,7 +29,7 @@
 }
 
 .DAZN-title {
-  font-family: Trim,'Now-Bold',Oscine;
+  font-family: Trim,'DAZN-Bold',Oscine;
   font-weight: 700;
   font-size: 4vh;
   color: white;
@@ -37,7 +39,7 @@
 
 .BoardHeader {
   width: 100%;
-  background-color: #343b3f;
+  background-color: #242d34;
   min-height: 10vh;
   display: flex;
   flex-direction: row;
@@ -50,14 +52,13 @@
   background: white;
   height: 1vh;
   display: block;
-  
 }
 
 @font-face {
-  font-family: 'Now-Bold';
+  font-family: 'DAZN-Bold';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/Now-Bold.otf');
+  src: url('./fonts/DAZNTrim-Bold.otf');
 }
 
 @keyframes App-logo-spin {
