@@ -1,4 +1,11 @@
 .InnovationDiv {
-    width: 10px;
-    height: 2%;
+    background: white;
+    border-radius: 5px;
+}
+
+.InnovationTitle {
+    font-family: Trim,'DAZN-Bold',Oscine;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
 }

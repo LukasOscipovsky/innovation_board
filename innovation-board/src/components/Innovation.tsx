@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-
-interface InnovationState {
-  open: boolean;
-  title: string;
-}
+import InnovationDTO from '../data/InnovationDTO';
 
 interface IProps {
-    open: boolean,
+    in: InnovationDTO;
 }
 
-class Innovation extends Component<IProps, InnovationState> { 
+interface IState {
+    in: InnovationDTO;
+}
+
+class Innovation extends Component<IProps, IState> { 
   constructor(props: any) {
     super(props);
-    this.state = {
-        open: this.props.open,
-        title: ''
+      this.state = {
+        in: this.props.in
+      }
     }
-}
     render() {
         return (
           <div className='InnovationDiv'>
+            <label className='InnovationTitle'>{this.state.in.title}</label>
           </div>
         );
       }

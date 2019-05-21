@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import InnovationDTO from '../data/InnovationDTO';
+import Innovation from './Innovation';
 
 interface TeamState {
   open: boolean;
@@ -32,6 +33,24 @@ class TeamBar extends Component<TeamProps, TeamState> {
   handleClose = () => {
     this.setState({ open: false });
   };  
+
+  handleSave = () => {
+    var i = new InnovationDTO("test", "testDescription");
+
+    var j: number;
+    for (j = 0; j < 10; j++) {
+      this.state.ins.push(i);
+    }
+
+    this.handleClose();
+  }
+
+  compsFromList() {
+    return this.state.ins
+    .map((i) => {
+      return (<Innovation in={i}/>)
+    });
+  }
   
   render() {
         return (
@@ -43,10 +62,9 @@ class TeamBar extends Component<TeamProps, TeamState> {
               </div>
             </div>
             <div className='InnovationContainer'>
+              {this.compsFromList()}
             </div>
             <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.handleClose}
             >
@@ -59,7 +77,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
                         /* onChange={event => this.setState({title: event.currentTarget.value})} */
                         placeholder="Innovation Title"
                         variant="outlined"
-                        style={{fontFamily: 'Trim,DAZN-Bold,Oscine', outli: 10}}
+                        style={{fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black'}}
                         margin="normal"
                         fullWidth={true}
                         />
@@ -67,7 +85,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
                         <div className="TextFieldDiv">
                         <TextField
                         required
-                        label="InnovationDescription" 
+                        label="Innovation Description" 
                         style={{fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black'}}
                         placeholder="Innovation Description"
                         variant="outlined"
@@ -81,7 +99,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
                     <div className="ModalActions">
                         <Button
                         style={{backgroundColor: '#242d34', marginRight: 20, color: '#f8fc00', fontFamily: 'Trim,DAZN-Bold,Oscine'}}
-                        onClick={this.handleClose}>
+                        onClick={this.handleSave}>
                         Save
                         </Button>
                         <Button
