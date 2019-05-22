@@ -137,8 +137,12 @@
 }
 
 .InnovationContainer {
+    padding-left: 20px;
+    padding-right: 10px;
+    width: 80%;
+    height: 10vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
 }

@@ -36,11 +36,20 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
   handleSave = () => {
     var i = new InnovationDTO("test", "testDescription");
+    var i2 = new InnovationDTO("test7567865", "testDescription");
+    var i3 = new InnovationDTO("test87578578", "testDescription");
+    var i4 = new InnovationDTO("test875785785785", "testDescription");
+    var i5 = new InnovationDTO("test578", "testDescription");
+    var i6 = new InnovationDTO("test785785785785785", "testDescription");
+    var i7 = new InnovationDTO("test42452452452452452452", "testDescription");
 
-    var j: number;
-    for (j = 0; j < 10; j++) {
-      this.state.ins.push(i);
-    }
+    this.state.ins.push(i);
+    this.state.ins.push(i2);
+    this.state.ins.push(i3);
+    this.state.ins.push(i4);
+    this.state.ins.push(i5);
+    this.state.ins.push(i6);
+    this.state.ins.push(i7);
 
     this.handleClose();
   }
