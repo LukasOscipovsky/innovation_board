@@ -105,7 +105,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
                         rowsMax={10}>
                         </TextField>
                         </div>
-                    <div className="ModalActions">
+                        <div className="ModalActions">
                         <Button
                         style={{backgroundColor: '#242d34', marginRight: 20, color: '#f8fc00', fontFamily: 'Trim,DAZN-Bold,Oscine'}}
                         onClick={this.handleSave}>
