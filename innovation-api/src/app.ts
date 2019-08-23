@@ -1,10 +1,14 @@
 import express = require('express');
+import InnovationClient from './client/innovationClient'
 
 const app = express();
-const port = 3000;
+const port = 8080;
+
 app.get('/', (req, res) => {
-  res.send('The sedulous hyena ate the antelope!');
+  new InnovationClient().getInnovations('rightsplatform');
+  res.send('passed');
 });
+
 app.listen(port, err => {
   if (err) {
     return console.error(err);
