@@ -2,14 +2,19 @@ import express = require('express');
 import InnovationClient from './client/innovationClient'
 import TeamDTO from './data/teamDTO';
 import InnovationDTO from './data/innovationDTO';
+import { ValueCheckingMode, OperationMode, JsonConvert } from "json2typescript";
+import { getJsonConverter } from './mapper/JsonConverter';
 
 const app = express();
 const port = 8080;
 
 const client = new InnovationClient();
 
+app.use(express.json());
+
 app.get('/team', (req, res) => {
-  var team: Promise<TeamDTO> = client.getTeam('rightsplatform');
+  let team: Promise<TeamDTO> = client.getTeam('rightsplatform');
+
   team.then(t => {
     res.json(t)
   }).catch(function (err) {
@@ -18,13 +23,10 @@ app.get('/team', (req, res) => {
 })
 
 app.put('/team', (req, res) => {
-  var innovation: InnovationDTO = new InnovationDTO('java11', 'java11 on production');
-  var innovation2: InnovationDTO = new InnovationDTO('java12', 'java12 on production')
-
-  var team: TeamDTO = new TeamDTO('rightsplatform', Array.of(innovation, innovation2))
+  let team: TeamDTO = getJsonConverter().deserializeObject(req.body, TeamDTO);
 
   client.createTeam(team);
-  res.send('passed');
+  res.send('Team created');
 });
 
 app.listen(port, err => {

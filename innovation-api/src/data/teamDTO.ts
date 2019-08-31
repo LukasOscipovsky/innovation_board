@@ -1,19 +1,12 @@
 import InnovationDTO from './innovationDTO'
+import { JsonObject, JsonProperty } from "json2typescript";
 
+@JsonObject("Team")
 export default class TeamDTO {
-  private _teamName: string;
-  private _innovations: Array<InnovationDTO>;
 
-  constructor(_teamName: string, _innovations: Array<InnovationDTO>) {
-    this._teamName = _teamName;
-    this._innovations = _innovations;
-  }
+  @JsonProperty("teamName", String)
+  teamName: String = undefined;
 
-  public get teamName(): string {
-    return this._teamName;
-  }
-
-  public get innovations(): Array<InnovationDTO> {
-    return this._innovations;
-  }
+  @JsonProperty("innovations", [InnovationDTO])
+  innovations: InnovationDTO[] = undefined;
 }

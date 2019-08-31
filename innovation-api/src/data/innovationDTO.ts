@@ -1,17 +1,11 @@
+import { JsonObject, JsonProperty } from "json2typescript";
+
+@JsonObject("Innovation")
 export default class InnovationDTO {
-  private _title: string;
-  private _description: string;
 
-  constructor(title: string, description: string) {
-    this._title = title;
-    this._description = description;
-  }
+  @JsonProperty("title", String)
+  title: String = undefined;
 
-  public get title(): string {
-    return this._title;
-  }
-
-  public get description(): string {
-    return this._description;
-  }
+  @JsonProperty("description", String)
+  description: String = undefined;
 }
