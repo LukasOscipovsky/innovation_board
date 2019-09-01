@@ -1,9 +1,8 @@
 import mongo = require('mongodb')
 
-const mongoClient = mongo.MongoClient
+const url: string = 'mongodb://localhost:27017';
+const mongoClient = mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 export async function getMongoConnection() {
-  let url: string = 'mongodb://localhost:27017';
-
-  return await mongoClient.connect(url);
+  return await mongoClient;
 }

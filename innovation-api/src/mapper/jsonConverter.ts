@@ -1,10 +1,10 @@
 import { ValueCheckingMode, OperationMode, JsonConvert } from "json2typescript";
+import { json } from "body-parser";
 
-export function getJsonConverter() {
-  let jsonConvert: JsonConvert = new JsonConvert();
-  jsonConvert.operationMode = OperationMode.LOGGING; // print some debug data
-  jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
-  jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL; // never allow null
+const jsonConvert: JsonConvert = new JsonConvert();
 
-  return jsonConvert;
-}
+jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to string etc.
+jsonConvert.valueCheckingMode = ValueCheckingMode.DISALLOW_NULL;
+
+
+export function getJsonConverter() { return jsonConvert } 
