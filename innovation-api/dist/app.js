@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const cors = require("cors");
 const innovationClient_1 = __importDefault(require("./client/innovationClient"));
 const teamDTO_1 = __importDefault(require("./data/teamDTO"));
 const jsonConverter_1 = require("./mapper/jsonConverter");
@@ -11,6 +12,7 @@ const app = express();
 const port = 8080;
 const client = new innovationClient_1.default();
 app.use(express.json());
+app.use(cors());
 app.get('/team/:teamName', (req, res) => {
     let team = client.getTeam(req.params.teamName);
     team.then(t => {

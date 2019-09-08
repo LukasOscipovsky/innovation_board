@@ -1,4 +1,3 @@
-//import mongo = require('mongodb')
 import TeamDTO from '../data/teamDTO';
 import InnovationDTO from '../data/innovationDTO';
 import { getJsonConverter } from '../mapper/JsonConverter'
@@ -20,7 +19,6 @@ export default class InnovationClient {
         var teamArray: TeamDTO[] = [];
 
         r.forEach(element => {
-          console.log(r);
           teamArray.push(getJsonConverter().deserializeObject(element, TeamDTO));
         });
 

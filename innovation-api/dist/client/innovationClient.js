@@ -11,7 +11,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import mongo = require('mongodb')
 const teamDTO_1 = __importDefault(require("../data/teamDTO"));
 const JsonConverter_1 = require("../mapper/JsonConverter");
 const mongoDbClient_1 = require("../client/mongoDbClient");
@@ -26,7 +25,6 @@ class InnovationClient {
                 .then(r => {
                 var teamArray = [];
                 r.forEach(element => {
-                    console.log(r);
                     teamArray.push(JsonConverter_1.getJsonConverter().deserializeObject(element, teamDTO_1.default));
                 });
                 return teamArray;

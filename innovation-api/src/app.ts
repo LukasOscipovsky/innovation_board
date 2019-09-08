@@ -1,8 +1,9 @@
 import express = require('express');
+import cors = require('cors');
 import InnovationClient from './client/innovationClient'
 import TeamDTO from './data/teamDTO';
 import InnovationDTO from './data/innovationDTO';
-import { ValueCheckingMode, OperationMode, JsonConvert } from "json2typescript";
+import { ValueCheckingMode, JsonConvert } from "json2typescript";
 import { getJsonConverter } from './mapper/jsonConverter';
 
 const app = express();
@@ -11,6 +12,7 @@ const port = 8080;
 const client = new InnovationClient();
 
 app.use(express.json());
+app.use(cors())
 
 app.get('/team/:teamName', (req, res) => {
   let team: Promise<TeamDTO> = client.getTeam(req.params.teamName);
