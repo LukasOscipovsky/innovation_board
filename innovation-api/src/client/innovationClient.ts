@@ -4,18 +4,35 @@ import InnovationDTO from '../data/innovationDTO';
 import { getJsonConverter } from '../mapper/JsonConverter'
 import { getMongoConnection } from '../client/mongoDbClient';
 
-//const mongoClient = mongo.MongoClient
-
 export default class InnovationClient {
 
-  //private static url: string = 'mongodb://localhost:27017';
   private static dbName: string = 'innovationboard';
   private static collectionName: string = 'team';
 
+  async getAll(): Promise<TeamDTO[]> {
+    let client: any = await getMongoConnection();
+
+    return await client.db(InnovationClient.dbName)
+      .collection(InnovationClient.collectionName)
+      .find()
+      .toArray()
+      .then(r => {
+        var teamArray: TeamDTO[] = [];
+
+        r.forEach(element => {
+          console.log(r);
+          teamArray.push(getJsonConverter().deserializeObject(element, TeamDTO));
+        });
+
+        return teamArray;
+      }).catch(function (err) {
+        console.log(err);
+      });;
+  }
 
   async getTeam(teamName: string): Promise<TeamDTO> {
     let client: any = await getMongoConnection();
-    let team: any = await client.db(InnovationClient.dbName)
+    return await client.db(InnovationClient.dbName)
       .collection(InnovationClient.collectionName)
       .findOne({ teamName: teamName })
       .then(r => {
@@ -23,8 +40,6 @@ export default class InnovationClient {
       }).catch(function (err) {
         console.log(err);
       });
-
-    return team;
   }
 
   async createTeam(team: TeamDTO) {

@@ -20,6 +20,14 @@ app.get('/team/:teamName', (req, res) => {
   }).catch(function (err) {
     console.log(err);
   });
+}).get('/team', (req, res) => {
+  let teams: Promise<TeamDTO[]> = client.getAll();
+
+  teams.then(t => {
+    res.json(t)
+  }).catch(function (err) {
+    console.log(err);
+  });
 }).put('/team', (req, res) => {
   let team: TeamDTO = getJsonConverter().deserializeObject(req.body, TeamDTO);
 

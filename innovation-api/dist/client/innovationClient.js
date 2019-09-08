@@ -15,12 +15,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const teamDTO_1 = __importDefault(require("../data/teamDTO"));
 const JsonConverter_1 = require("../mapper/JsonConverter");
 const mongoDbClient_1 = require("../client/mongoDbClient");
-//const mongoClient = mongo.MongoClient
 class InnovationClient {
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let client = yield mongoDbClient_1.getMongoConnection();
+            return yield client.db(InnovationClient.dbName)
+                .collection(InnovationClient.collectionName)
+                .find()
+                .toArray()
+                .then(r => {
+                var teamArray = [];
+                r.forEach(element => {
+                    console.log(r);
+                    teamArray.push(JsonConverter_1.getJsonConverter().deserializeObject(element, teamDTO_1.default));
+                });
+                return teamArray;
+            }).catch(function (err) {
+                console.log(err);
+            });
+            ;
+        });
+    }
     getTeam(teamName) {
         return __awaiter(this, void 0, void 0, function* () {
             let client = yield mongoDbClient_1.getMongoConnection();
-            let team = yield client.db(InnovationClient.dbName)
+            return yield client.db(InnovationClient.dbName)
                 .collection(InnovationClient.collectionName)
                 .findOne({ teamName: teamName })
                 .then(r => {
@@ -28,7 +47,6 @@ class InnovationClient {
             }).catch(function (err) {
                 console.log(err);
             });
-            return team;
         });
     }
     createTeam(team) {
@@ -43,7 +61,6 @@ class InnovationClient {
         });
     }
 }
-//private static url: string = 'mongodb://localhost:27017';
 InnovationClient.dbName = 'innovationboard';
 InnovationClient.collectionName = 'team';
 exports.default = InnovationClient;
