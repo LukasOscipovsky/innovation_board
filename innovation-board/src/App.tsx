@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import logo from './assets/DAZN-hero-updated.png';
 import './App.css';
-import axios from 'axios';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import TeamDTO from './data/teamDTO';
+import getTeams from './client/teamClient';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import TeamBar from './components/TeamBar';
-import jsonConverter from './mapper/jsonConverter'
 
 const theme = createMuiTheme();
 
-class App extends Component {
+interface AppState {
+  teams: TeamDTO[];
+}
 
-  compsFromList() {
-    return getTeams()
-    .then(teams => {
-      return teams.map((t) => {
-        return (<TeamBar team={t} />)
-      });
-    })
+export default class App extends Component<{}, AppState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      teams: [],
+    }
+  }
+
+  componentDidMount() {
+    getTeams().then(r => {
+      const teams = r;
+      this.setState({ teams });
+    }, err => console.log(err));
   }
 
   render() {
@@ -31,18 +38,10 @@ class App extends Component {
         <div className="WhiteLine" />
         <MuiThemeProvider theme={theme}>
           <div className="MainDiv">
-            {this.compsFromList()}
+            {this.state.teams.map(t => <TeamBar team={t} />)}
           </div>
         </MuiThemeProvider>
       </div>
     );
   }
 }
-
-async function getTeams(): Promise<TeamDTO[]> {
-  return await axios.get('http://localhost:8080/team').then(r => {
-    return jsonConverter().deserializeArray(r.data, TeamDTO);
-  });
-}
-
-export default App;

@@ -8,7 +8,6 @@ import TeamDTO from '../data/teamDTO';
 
 interface TeamState {
   open: boolean;
-  name: string;
 }
 
 interface TeamProps {
@@ -19,8 +18,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      open: false,
-      name: '',
+      open: false
     }
   }
 
@@ -49,7 +47,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
     return (
       <div className='TeamBar'>
         <div className='FormDiv'>
-          <label className='FormLabel'>{this.state.name}</label>
+          <label className='FormLabel'>{this.props.team.teamName}</label>
           <div className="PlusDiv" onClick={this.handleOpen}>
             <img src={Add} className="Add-icon" alt="add" />
           </div>

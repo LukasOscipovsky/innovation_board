@@ -5,10 +5,10 @@ import { JsonObject, JsonProperty } from "json2typescript";
 export default class TeamDTO {
 
   @JsonProperty("teamName", String)
-  _teamName: String | undefined = undefined;
+  private _teamName: String | undefined = undefined;
 
   @JsonProperty("innovations", [InnovationDTO])
-  _innovations: InnovationDTO[] | undefined = undefined;
+  private _innovations: InnovationDTO[] | undefined = undefined;
 
   get teamName() {
     return this._teamName;

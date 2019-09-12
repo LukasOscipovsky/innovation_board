@@ -12,9 +12,7 @@ const mongo = require("mongodb");
 const url = 'mongodb://localhost:27017';
 const mongoClient = mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 function getMongoConnection() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return yield mongoClient;
-    });
+    return __awaiter(this, void 0, void 0, function* () { return yield mongoClient; });
 }
 exports.getMongoConnection = getMongoConnection;
 //# sourceMappingURL=mongoDbClient.js.map
