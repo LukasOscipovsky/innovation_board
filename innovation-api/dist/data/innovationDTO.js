@@ -14,6 +14,7 @@ let InnovationDTO = class InnovationDTO {
     constructor() {
         this.title = undefined;
         this.description = undefined;
+        this.status = undefined;
     }
 };
 __decorate([
@@ -24,6 +25,10 @@ __decorate([
     json2typescript_1.JsonProperty("description", String),
     __metadata("design:type", String)
 ], InnovationDTO.prototype, "description", void 0);
+__decorate([
+    json2typescript_1.JsonProperty("status", Number),
+    __metadata("design:type", Number)
+], InnovationDTO.prototype, "status", void 0);
 InnovationDTO = __decorate([
     json2typescript_1.JsonObject("Innovation")
 ], InnovationDTO);

@@ -9,17 +9,7 @@
     width: 100%;
 }
 
-.teamBar .titleContainer {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    display: block;
-  }
-  
-.titleContainer .title{
+.teamBar .titleContainer{
     background:  #f8fc00;
     width: 300px;
     align-items: center;
@@ -28,6 +18,16 @@
     flex-direction: row;
     justify-content: space-between;
     box-shadow: 2px 3px 8px #000000;
+}
+
+.teamBar .titleContainer .title{
+    font-family: Trim,'DAZN-Bold',Oscine;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 20px;
+    color: #242d34;
+    padding: 10px;
+    display: block;
 }
 
 .InnovationModal {

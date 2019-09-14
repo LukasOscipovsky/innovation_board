@@ -8,4 +8,7 @@ export default class InnovationDTO {
 
   @JsonProperty("description", String)
   description: String = undefined;
+
+  @JsonProperty("status", Number)
+  status: number = undefined;
 }
