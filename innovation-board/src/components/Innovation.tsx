@@ -2,27 +2,33 @@ import React, { Component } from 'react';
 import InnovationDTO from '../data/InnovationDTO';
 
 interface IProps {
-    in: InnovationDTO;
+  in: InnovationDTO;
 }
 
 interface IState {
-    in: InnovationDTO;
+  in: InnovationDTO;
 }
 
-class Innovation extends Component<IProps, IState> { 
+class Innovation extends Component<IProps, IState> {
   constructor(props: any) {
     super(props);
-      this.state = {
-        in: this.props.in
-      }
+    this.state = {
+      in: this.props.in
     }
-    render() {
-        return (
-          <div className='InnovationDiv'>
-            <label className='InnovationTitle'>{this.state.in.title}</label>
-          </div>
-        );
-      }
-    }
-    
-    export default Innovation;
+  }
+
+  render() {
+    let upper: string = this.state.in.title === undefined ? '' : this.state.in.title.toUpperCase();
+
+    return (
+      <div className='innovation'>
+        <div className='title-container'>
+          <label className='title'>{upper}</label>
+        </div>
+        <div className='line' />
+      </div>
+    );
+  }
+}
+
+export default Innovation;

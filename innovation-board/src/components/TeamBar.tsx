@@ -44,13 +44,12 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   render() {
+    let upper = this.props.team.teamName === undefined ? '' : this.props.team.teamName.toUpperCase();
+
     return (
-      <div className='TeamBar'>
-        <div className='FormDiv'>
-          <label className='FormLabel'>{this.props.team.teamName}</label>
-          <div className="PlusDiv" onClick={this.handleOpen}>
-            <img src={Add} className="Add-icon" alt="add" />
-          </div>
+      <div className='teamBar'>
+        <div className='titleContainer'>
+          <label className='title'>{upper}</label>
         </div>
         <div className='InnovationContainer'>
           {this.compsFromList()}

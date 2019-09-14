@@ -22,8 +22,7 @@ export default class App extends Component<{}, AppState> {
 
   componentDidMount() {
     getTeams().then(r => {
-      const teams = r;
-      this.setState({ teams });
+      this.setState({ teams: r });
     }, err => console.log(err));
   }
 
