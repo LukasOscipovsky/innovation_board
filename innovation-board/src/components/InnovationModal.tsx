@@ -6,6 +6,8 @@ import InnovationDTO from '../data/InnovationDTO';
 
 interface ModalState {
   open: boolean;
+  title: string | undefined;
+  description: string | undefined;
 }
 
 interface ModalProps {
@@ -17,7 +19,9 @@ interface ModalProps {
 class InnovationModal extends Component<ModalProps, ModalState> {
   componentWillMount() {
     this.setState({
-      open: false
+      open: false,
+      title: this.props.in.getTitle,
+      description: this.props.in.getDescription
     })
   }
 
@@ -30,6 +34,8 @@ class InnovationModal extends Component<ModalProps, ModalState> {
   };
 
   handleSave = () => {
+    this.props.in.setTitle = this.state.title;
+    this.props.in.setDescription = this.state.description;
     this.props.triggerInSave(this.props.in)
     this.handleClose();
   }
@@ -46,13 +52,13 @@ class InnovationModal extends Component<ModalProps, ModalState> {
             <TextField
               required
               label="InnovationTitle"
-              onChange={event => this.props.in.title = event.currentTarget.value}
+              onChange={event => this.setState({ title: event.currentTarget.value })}
               placeholder="Innovation Title"
               variant="outlined"
               style={{ fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black' }
               }
               margin="normal"
-              value={this.props.in.title}
+              value={this.state.title}
               fullWidth={true}
             />
           </div>
@@ -60,12 +66,12 @@ class InnovationModal extends Component<ModalProps, ModalState> {
             <TextField
               required
               label="Innovation Description"
-              onChange={event => this.props.in.description = event.currentTarget.value}
+              onChange={event => this.setState({ description: event.currentTarget.value })}
               style={{ fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black' }}
               placeholder="Innovation Description"
               variant="outlined"
               multiline={true}
-              value={this.props.in.description}
+              value={this.state.description}
               fullWidth
               margin="normal"
               rows={8}

@@ -11,14 +11,14 @@ interface TeamProps {
 class TeamBar extends Component<TeamProps, {}> {
 
   saveTeam(innovation: InnovationDTO) {
-    if (this.props.team.innovations === undefined) {
+    if (this.props.team.getInnovations === undefined) {
       return;
     }
 
-    let inToUpdate: InnovationDTO | undefined = this.props.team.innovations.find(t => t.title === innovation.title);
+    let inToUpdate: InnovationDTO | undefined = this.props.team.getInnovations.find(t => t.getTitle === innovation.getTitle);
 
     if (inToUpdate === undefined) {
-      this.props.team.innovations.push(innovation);
+      this.props.team.getInnovations.push(innovation);
     } else {
       console.log(innovation);
       inToUpdate = innovation;
@@ -28,8 +28,8 @@ class TeamBar extends Component<TeamProps, {}> {
   }
 
   compsFromList() {
-    if (this.props.team.innovations !== undefined) {
-      return this.props.team.innovations
+    if (this.props.team.getInnovations !== undefined) {
+      return this.props.team.getInnovations
         .map((i) => {
           return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} />)
         });
@@ -37,7 +37,7 @@ class TeamBar extends Component<TeamProps, {}> {
   }
 
   render() {
-    let upper = this.props.team.teamName === undefined ? '' : this.props.team.teamName.toUpperCase();
+    let upper = this.props.team.getTeamName === undefined ? '' : this.props.team.getTeamName.toUpperCase();
 
     return (
       <div className='teamBar'>

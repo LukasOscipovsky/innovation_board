@@ -4,46 +4,46 @@ import { JsonObject, JsonProperty } from "json2typescript";
 export default class InnovationDTO {
 
   @JsonProperty("title", String)
-  private _title: string | undefined = undefined;
+  private title: string | undefined = undefined;
 
   @JsonProperty("description", String)
-  private _description: string | undefined = undefined;
+  private description: string | undefined = undefined;
 
   @JsonProperty("status", Number)
-  private _status: number | undefined = undefined;
+  private status: number | undefined = undefined;
 
   @JsonProperty("priority", Number)
-  private _priority: number | undefined = undefined;
+  private priority: number | undefined = undefined;
 
-  get title(): string | undefined {
-    return this._title;
+  get getTitle(): string | undefined {
+    return this.title;
   }
 
-  set title(title: string | undefined) {
-    this._title = title;
+  set setTitle(title: string | undefined) {
+    this.title = title;
   }
 
-  get description() {
-    return this._description;
+  get getDescription(): string | undefined {
+    return this.description;
   }
 
-  set description(description: string | undefined) {
-    this._description = description;
+  set setDescription(description: string | undefined) {
+    this.description = description;
   }
 
-  get status() {
-    return this._status;
+  get getStatus(): number | undefined {
+    return this.status;
   }
 
-  set status(status: number | undefined) {
-    this._status = status;
+  set setStatus(status: number | undefined) {
+    this.status = status;
   }
 
-  get priority() {
-    return this._priority;
+  get getPriority(): number | undefined {
+    return this.priority;
   }
 
-  set priority(priority: number | undefined) {
-    this._priority = priority;
+  set setPriority(priority: number | undefined) {
+    this.priority = priority;
   }
 }

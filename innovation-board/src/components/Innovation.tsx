@@ -29,8 +29,8 @@ class Innovation extends Component<IProps, IState> {
   }
 
   render() {
-    let upper: string = this.state.in.title === undefined ? '' : this.state.in.title.toUpperCase();
-    let lineColor: string = this.props.in.status === undefined ? '#A9A9A9' : colors[this.props.in.status];
+    let upper: string = this.state.in.getTitle === undefined ? '' : this.state.in.getTitle.toUpperCase();
+    let lineColor: string = this.props.in.getStatus === undefined ? '#A9A9A9' : colors[this.props.in.getStatus];
 
     return (
       <div className='innovation'>
