@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import logo from './assets/DAZN-hero-updated.png';
 import './App.css';
 import TeamDTO from './data/teamDTO';
-import getTeams from './client/teamClient';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import TeamBar from './components/TeamBar';
-
+import { getTeams } from './client/teamClient';
 const theme = createMuiTheme();
 
 interface AppState {

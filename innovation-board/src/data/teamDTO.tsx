@@ -8,7 +8,7 @@ export default class TeamDTO {
   private _teamName: String | undefined = undefined;
 
   @JsonProperty("innovations", [InnovationDTO])
-  private _innovations: InnovationDTO[] | undefined = undefined;
+  private _innovations: Array<InnovationDTO> | undefined = undefined;
 
   get teamName() {
     return this._teamName;

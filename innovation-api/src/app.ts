@@ -34,7 +34,7 @@ app.get('/team/:teamName', (req, res) => {
   let team: TeamDTO = getJsonConverter().deserializeObject(req.body, TeamDTO);
 
   client.createTeam(team);
-  res.send('Team created');
+  res.send('Team created/updated');
 }).listen(port, err => {
   if (err) {
     return console.error(err);

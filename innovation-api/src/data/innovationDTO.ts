@@ -11,4 +11,7 @@ export default class InnovationDTO {
 
   @JsonProperty("status", Number)
   status: number = undefined;
+
+  @JsonProperty("priority", Number)
+  priority: number = undefined;
 }

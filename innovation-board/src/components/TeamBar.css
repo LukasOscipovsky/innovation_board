@@ -1,4 +1,5 @@
 @import './Innovation.css';
+@import './InnovationModal.css';
 
 .teamBar {
     padding: 5px;
@@ -30,92 +31,7 @@
     display: block;
 }
 
-.InnovationModal {
-    background: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: center;
-    width: 25%;
-    height: 40%;
-    border-radius: 10px;
-}
-
-.ModalTitle {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: bold;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.InnovationTitle {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.InnovationDescription {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.ModalActions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-}
-
-.InnovationModal {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-    height: 50%;
-    border-radius: 50px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.ModalTitle {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: bold;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.InnovationTitle {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.InnovationDescription {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.ModalActions {
-    display: flex;
-    flex-direction: row;
-    margin-top: 25px;
-}
-
-.TextFieldDiv {
-    width: 90%;
-}
-
-.InnovationContainer {  
+.teamBar .innovationContainer {  
   padding-left: 15px;
   padding-right: 30px;
   width: 80%;
