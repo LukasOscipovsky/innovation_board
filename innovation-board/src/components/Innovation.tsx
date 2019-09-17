@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import InnovationDTO from '../data/InnovationDTO';
-import InnovationModal from './InnovationModal'
+import InnovationDTO from '../data/innovationDTO';
+import InnovationModal from './InnovationModal';
 
 interface IProps {
   in: InnovationDTO;

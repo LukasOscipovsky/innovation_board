@@ -21,6 +21,13 @@
     box-shadow: 2px 3px 8px #000000;
 }
 
+.teamBar .titleContainer .plus {
+    width: 5vh;
+    height: 5vh;
+    padding-right:5px;
+  }
+  
+
 .teamBar .titleContainer .title{
     font-family: Trim,'DAZN-Bold',Oscine;
     font-style: italic;

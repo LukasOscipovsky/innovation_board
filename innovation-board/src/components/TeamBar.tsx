@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
-import { saveTeam } from '../client/teamClient'
+import InnovationDTO from '../data/innovationDTO';
+import InnovationModal from './InnovationModal';
+import { saveTeam } from '../client/teamClient';
+import plus from '../assets/Plus.png';
 
 interface TeamProps {
   team: TeamDTO
 }
 
-class TeamBar extends Component<TeamProps, {}> {
+interface TeamState {
+  team: TeamDTO;
+  innovationOpened: boolean;
+  newInnovation: InnovationDTO;
+}
+
+class TeamBar extends Component<TeamProps, TeamState> {
+
+  componentWillMount() {
+    this.setState({
+      team: this.props.team,
+      innovationOpened: false,
+      newInnovation: new InnovationDTO(),
+    })
+  }
 
   saveTeam(innovation: InnovationDTO) {
+    innovation.setPriority = 0;
+    innovation.setStatus = 1;
+
     if (this.props.team.getInnovations === undefined) {
       return;
     }
@@ -20,11 +39,12 @@ class TeamBar extends Component<TeamProps, {}> {
     if (inToUpdate === undefined) {
       this.props.team.getInnovations.push(innovation);
     } else {
-      console.log(innovation);
       inToUpdate = innovation;
     }
 
     saveTeam(this.props.team);
+
+    this.setState({ team: this.props.team });
   }
 
   compsFromList() {
@@ -43,6 +63,8 @@ class TeamBar extends Component<TeamProps, {}> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <label className='title'>{upper}</label>
+          <img src={plus} className='plus' onClick={e => this.setState({ innovationOpened: true })} />
+          <InnovationModal triggerInSave={innovation => { this.setState({ innovationOpened: false }); this.saveTeam(innovation) }} open={this.state.innovationOpened} in={this.state.newInnovation} />
         </div>
         <div className='innovationContainer'>
           {this.compsFromList()}

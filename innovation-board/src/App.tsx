@@ -27,15 +27,14 @@ export default class App extends Component<{}, AppState> {
 
   render() {
     return (
-      <div className="App">
-        <header className="BoardHeader">
-          <img src={logo} className="DAZN-logo" alt="logo" />
-          <p className="DAZN-title">DAZN Košice - Innovation Board</p>
-          <img src={logo} className="DAZN-logo" alt="logo" />
+      <div className="app">
+        <header className="boardHeader">
+          <p className="daznTitle">DAZN Košice - Innovation Board</p>
+          <img src={logo} className="appDaznLogo" alt="logo" />
         </header>
-        <div className="WhiteLine" />
+        <div className="whiteLine" />
         <MuiThemeProvider theme={theme}>
-          <div className="MainDiv">
+          <div className="mainDiv">
             {this.state.teams.map(t => <TeamBar team={t} />)}
           </div>
         </MuiThemeProvider>

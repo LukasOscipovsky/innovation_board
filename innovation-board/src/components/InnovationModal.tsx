@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 
 interface ModalState {
   open: boolean;
@@ -38,6 +38,7 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     this.props.in.setDescription = this.state.description;
     this.props.triggerInSave(this.props.in)
     this.handleClose();
+    console.log(this.props.open);
   }
 
   render() {

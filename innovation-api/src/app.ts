@@ -2,8 +2,6 @@ import express = require('express');
 import cors = require('cors');
 import InnovationClient from './client/innovationClient'
 import TeamDTO from './data/teamDTO';
-import InnovationDTO from './data/innovationDTO';
-import { ValueCheckingMode, JsonConvert } from "json2typescript";
 import { getJsonConverter } from './mapper/jsonConverter';
 
 const app = express();
