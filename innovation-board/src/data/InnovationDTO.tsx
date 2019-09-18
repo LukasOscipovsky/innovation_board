@@ -15,32 +15,32 @@ export default class InnovationDTO {
   @JsonProperty("priority", Number)
   private priority: number | undefined = undefined;
 
-  get getTitle(): string | undefined {
-    return this.title;
+  get getTitle(): string {
+    return this.title === undefined ? '' : this.title;
   }
 
   set setTitle(title: string | undefined) {
     this.title = title;
   }
 
-  get getDescription(): string | undefined {
-    return this.description;
+  get getDescription(): string {
+    return this.description === undefined ? '' : this.description;
   }
 
   set setDescription(description: string | undefined) {
     this.description = description;
   }
 
-  get getStatus(): number | undefined {
-    return this.status;
+  get getStatus(): number {
+    return this.status === undefined ? 0 : this.status;
   }
 
   set setStatus(status: number | undefined) {
     this.status = status;
   }
 
-  get getPriority(): number | undefined {
-    return this.priority;
+  get getPriority(): number {
+    return this.priority === undefined ? 0 : this.priority;
   }
 
   set setPriority(priority: number | undefined) {

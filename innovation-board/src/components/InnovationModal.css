@@ -70,3 +70,10 @@
 .TextFieldDiv {
     width: 90%;
 }
+
+.SelectBoxes {
+    display:flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+}

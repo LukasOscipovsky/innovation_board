@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import InnovationDTO from '../data/innovationDTO';
 
 interface ModalState {
   open: boolean;
-  title: string | undefined;
-  description: string | undefined;
+  title: string;
+  description: string;
+  status: number;
 }
 
 interface ModalProps {
@@ -21,7 +26,8 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     this.setState({
       open: false,
       title: this.props.in.getTitle,
-      description: this.props.in.getDescription
+      description: this.props.in.getDescription,
+      status: this.props.in.getStatus
     })
   }
 
@@ -78,6 +84,27 @@ class InnovationModal extends Component<ModalProps, ModalState> {
               rows={8}
               rowsMax={10} >
             </TextField>
+          </div>
+          <div className="SelectBoxes">
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-status-simple">
+                Status
+            </InputLabel>
+              <Select
+                value={this.state.status}
+                variant="outlined"
+                onChange={event => this.setState({ status: parseInt(event.target.value) })}
+                style={{ width: 120 }}
+                inputProps={{
+                  name: 'status',
+                  id: 'outlined-status-simple',
+                }}
+              >
+                <MenuItem value={0}>Planned</MenuItem>
+                <MenuItem value={1}>In Progress</MenuItem>
+                <MenuItem value={2}>Done</MenuItem>
+              </Select>
+            </FormControl>
           </div>
           <div className="ModalActions">
             <Button

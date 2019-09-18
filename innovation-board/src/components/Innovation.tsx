@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InnovationDTO from '../data/innovationDTO';
 import InnovationModal from './InnovationModal';
+import getStatusColor from '../colors/colors'
 
 interface IProps {
   in: InnovationDTO;
@@ -11,11 +12,6 @@ interface IState {
   in: InnovationDTO;
   open: boolean;
 }
-
-const colors: { [id: number]: string; } = {};
-colors[0] = "#f8fc00";
-colors[1] = "#A52A2A";
-colors[2] = "#006400";
 
 class Innovation extends Component<IProps, IState> {
 
@@ -29,8 +25,8 @@ class Innovation extends Component<IProps, IState> {
   }
 
   render() {
-    let upper: string = this.state.in.getTitle === undefined ? '' : this.state.in.getTitle.toUpperCase();
-    let lineColor: string = this.props.in.getStatus === undefined ? '#A9A9A9' : colors[this.props.in.getStatus];
+    let upper: string = this.state.in.getTitle.toUpperCase();
+    let lineColor: string = getStatusColor(this.props.in.getStatus);
 
     return (
       <div className='innovation'>
