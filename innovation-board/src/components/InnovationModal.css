@@ -33,21 +33,11 @@
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 50%;
+    height: 60%;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-}
-
-.ModalTitle {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: bold;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    margin-bottom: 20px;
 }
 
 .InnovationTitle {

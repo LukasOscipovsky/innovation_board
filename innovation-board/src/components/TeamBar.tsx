@@ -28,7 +28,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
   saveTeam(innovation: InnovationDTO) {
     innovation.setPriority = 0;
-    innovation.setStatus = 1;
 
     if (this.props.team.getInnovations === undefined) {
       return;
