@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
 import InnovationDTO from '../data/innovationDTO';
-import InnovationModal from './InnovationModal';
 import { saveTeam } from '../client/teamClient';
 import plus from '../assets/Plus.png';
 
@@ -13,7 +12,6 @@ interface TeamProps {
 interface TeamState {
   team: TeamDTO;
   innovationOpened: boolean;
-  newInnovation: InnovationDTO;
 }
 
 class TeamBar extends Component<TeamProps, TeamState> {
@@ -22,7 +20,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
     this.setState({
       team: this.props.team,
       innovationOpened: false,
-      newInnovation: new InnovationDTO(),
     })
   }
 
@@ -62,8 +59,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <label className='title'>{upper}</label>
-          <img src={plus} className='plus' onClick={e => this.setState({ innovationOpened: true })} />
-          <InnovationModal triggerInSave={innovation => { this.setState({ innovationOpened: false }); this.saveTeam(innovation) }} open={this.state.innovationOpened} in={this.state.newInnovation} />
+          <img src={plus} className='plus' alt='plus' onClick={e => this.setState({ innovationOpened: true })} />
         </div>
         <div className='innovationContainer'>
           {this.compsFromList()}

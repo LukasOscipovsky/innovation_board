@@ -11,10 +11,10 @@ export default class TeamDTO {
   private innovations: Array<InnovationDTO> | undefined = undefined;
 
   get getTeamName() {
-    return this.teamName;
+    return this.teamName === undefined ? '' : this.teamName;
   }
 
-  get getInnovations() {
-    return this.innovations;
+  get getInnovations(): Array<InnovationDTO> | undefined {
+    return this.innovations === undefined ? [] : this.innovations;
   }
 }

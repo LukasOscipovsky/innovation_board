@@ -13,6 +13,7 @@ interface ModalState {
   title: string;
   description: string;
   status: number;
+  priority: number;
 }
 
 interface ModalProps {
@@ -27,7 +28,8 @@ class InnovationModal extends Component<ModalProps, ModalState> {
       open: false,
       title: this.props.in.getTitle,
       description: this.props.in.getDescription,
-      status: this.props.in.getStatus
+      status: this.props.in.getStatus,
+      priority: this.props.in.getPriority
     })
   }
 
@@ -42,9 +44,10 @@ class InnovationModal extends Component<ModalProps, ModalState> {
   handleSave = () => {
     this.props.in.setTitle = this.state.title;
     this.props.in.setDescription = this.state.description;
-    this.props.triggerInSave(this.props.in)
-    this.handleClose();
-    console.log(this.props.open);
+    this.props.in.setStatus = this.state.status;
+    this.props.in.setPriority = this.state.priority;
+    this.props.triggerInSave(this.props.in);
+    this.setState({ open: false });
   }
 
   render() {
@@ -94,7 +97,7 @@ class InnovationModal extends Component<ModalProps, ModalState> {
                 value={this.state.status}
                 variant="outlined"
                 onChange={event => this.setState({ status: parseInt(event.target.value) })}
-                style={{ width: 120 }}
+                style={{ width: 120, marginRight: 30 }}
                 inputProps={{
                   name: 'status',
                   id: 'outlined-status-simple',
@@ -103,6 +106,25 @@ class InnovationModal extends Component<ModalProps, ModalState> {
                 <MenuItem value={0}>Planned</MenuItem>
                 <MenuItem value={1}>In Progress</MenuItem>
                 <MenuItem value={2}>Done</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-status-simple">
+                Priority
+            </InputLabel>
+              <Select
+                value={this.state.priority}
+                variant="outlined"
+                onChange={event => this.setState({ priority: parseInt(event.target.value) })}
+                style={{ width: 120, marginLeft: 30 }}
+                inputProps={{
+                  name: 'priority',
+                  id: 'outlined-status-simple',
+                }}
+              >
+                <MenuItem value={0}>Low</MenuItem>
+                <MenuItem value={1}>Medium</MenuItem>
+                <MenuItem value={2}>High</MenuItem>
               </Select>
             </FormControl>
           </div>
