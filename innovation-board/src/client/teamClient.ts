@@ -11,5 +11,5 @@ export const getTeams = async () => {
 
 export const saveTeam = async (team: TeamDTO) => {
   return await axios.put('http://localhost:8080/team', team)
-    .then(r => console.log(r), err => { console.log(err) })
+    .then(r => r, err => { console.log(err) })
 }

@@ -34,7 +34,9 @@ class InnovationModal extends Component<ModalProps, ModalState> {
   }
 
   componentWillReceiveProps(props: ModalProps) {
-    this.setState({ open: props.open })
+    if (this.state.open !== props.open) {
+      this.setState({ open: props.open })
+    }
   }
 
   handleClose = () => {
@@ -47,14 +49,14 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
     this.props.triggerInSave(this.props.in);
-    this.setState({ open: false });
+    this.handleClose();
   }
 
   render() {
     return (
       <Modal
         open={this.state.open}
-        onClose={this.handleClose}
+      //onClose={this.handleClose}
       >
         <div className="InnovationModal" >
           <label className="ModalTitle" >INNOVATION</label>

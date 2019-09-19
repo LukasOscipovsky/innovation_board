@@ -11,7 +11,6 @@ interface TeamProps {
 
 interface TeamState {
   team: TeamDTO;
-  innovationOpened: boolean;
 }
 
 class TeamBar extends Component<TeamProps, TeamState> {
@@ -19,13 +18,10 @@ class TeamBar extends Component<TeamProps, TeamState> {
   componentWillMount() {
     this.setState({
       team: this.props.team,
-      innovationOpened: false,
     })
   }
 
   saveTeam(innovation: InnovationDTO) {
-    innovation.setPriority = 0;
-
     if (this.props.team.getInnovations === undefined) {
       return;
     }
@@ -53,13 +49,13 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   render() {
-    let upper = this.props.team.getTeamName === undefined ? '' : this.props.team.getTeamName.toUpperCase();
+    let upper = this.props.team.getTeamName.toUpperCase();
 
     return (
       <div className='teamBar'>
         <div className='titleContainer'>
           <label className='title'>{upper}</label>
-          <img src={plus} className='plus' alt='plus' onClick={e => this.setState({ innovationOpened: true })} />
+          <img src={plus} className='plus' alt='plus' />
         </div>
         <div className='innovationContainer'>
           {this.compsFromList()}
