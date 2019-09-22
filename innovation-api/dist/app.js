@@ -28,7 +28,6 @@ app.get('/team/:teamName', (req, res) => {
         console.log(err);
     });
 }).put('/team', (req, res) => {
-    console.log(req.body);
     let team = jsonConverter_1.getJsonConverter().deserializeObject(req.body, teamDTO_1.default);
     client.createTeam(team);
     res.send('Team created/updated');

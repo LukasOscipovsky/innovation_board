@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import InnovationDTO from '../data/innovationDTO';
 import InnovationModal from './InnovationModal';
-import getStatusColor from '../colors/colors'
+import { getPriorityColor, getStatusColor } from '../colors/colors'
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
 
 interface IProps {
   in: InnovationDTO;
@@ -32,7 +33,10 @@ class Innovation extends Component<IProps, IState> {
       <div className='innovation'>
         <div className='title-container'>
           <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
-          <InnovationModal triggerInSave={innovation => this.props.triggerInSave(innovation)} open={this.state.open} in={this.state.in} />
+          <InnovationModal triggerInSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
+        </div>
+        <div className='priority'>
+          <ArrowUpward style={{ color: getPriorityColor(this.state.in.getPriority), width: 15 }} />
         </div>
         <div className='line' style={{ background: lineColor, opacity: 1 }} />
       </div>

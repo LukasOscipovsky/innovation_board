@@ -25,7 +25,6 @@ interface ModalProps {
 class InnovationModal extends Component<ModalProps, ModalState> {
   componentWillMount() {
     this.setState({
-      open: false,
       title: this.props.in.getTitle,
       description: this.props.in.getDescription,
       status: this.props.in.getStatus,
@@ -35,7 +34,9 @@ class InnovationModal extends Component<ModalProps, ModalState> {
 
   componentWillReceiveProps(props: ModalProps) {
     if (this.state.open !== props.open) {
-      this.setState({ open: props.open })
+      this.setState({ open: props.open });
+      console.log(this.state.open);
+      console.log(this.props.in.getTitle);
     }
   }
 
@@ -49,14 +50,13 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
     this.props.triggerInSave(this.props.in);
-    this.handleClose();
   }
 
   render() {
     return (
       <Modal
         open={this.state.open}
-      //onClose={this.handleClose}
+        onClose={this.handleClose}
       >
         <div className="InnovationModal" >
           <label className="ModalTitle" >INNOVATION</label>
@@ -137,7 +137,7 @@ class InnovationModal extends Component<ModalProps, ModalState> {
               Save
             </Button>
             <Button
-              style={{ backgroundColor: '#242d34', color: '#DC143C', fontFamily: 'Trim,DAZN-Bold,Oscine' }}
+              style={{ backgroundColor: '#242d34', color: '#FF4136', fontFamily: 'Trim,DAZN-Bold,Oscine' }}
               onClick={this.handleClose}>
               Close
             </Button>
