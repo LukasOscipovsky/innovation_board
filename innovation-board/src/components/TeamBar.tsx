@@ -4,7 +4,7 @@ import TeamDTO from '../data/teamDTO';
 import InnovationDTO from '../data/innovationDTO';
 import { saveTeam } from '../client/teamClient';
 import InnovationModal from './InnovationModal';
-import plus from '../assets/Plus.png';
+import AddBox from '@material-ui/icons/AddBoxTwoTone';
 
 interface TeamProps {
   team: TeamDTO
@@ -27,7 +27,9 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   saveTeam(innovation: InnovationDTO) {
-    if (this.props.team.getInnovations === undefined) {
+    if (this.props.team.getInnovations === undefined ||
+      innovation.getTitle === '' ||
+      innovation.getDescription === '') {
       return;
     }
 
@@ -60,7 +62,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <label className='title'>{upper}</label>
-          <img src={plus} className='plus' alt='plus' onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
+          <AddBox style={{ width: 30, paddingRight: 10 }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
           <InnovationModal triggerInSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }} open={this.state.modalOpened} in={this.state.innovation} />
         </div>
         <div className='innovationContainer'>
