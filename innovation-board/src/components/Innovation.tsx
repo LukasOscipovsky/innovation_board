@@ -4,6 +4,7 @@ import InnovationModal from './InnovationModal';
 import { getPriorityColor, getStatusColor } from '../colors/colors'
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Clear from '@material-ui/icons/Clear';
+import Tooltip from '@material-ui/core/Tooltip';
 
 interface IProps {
   in: InnovationDTO;
@@ -36,10 +37,12 @@ class Innovation extends Component<IProps, IState> {
         <div className='clear'>
           <Clear style={{ color: '#FF4136', width: 15 }} onClick={e => this.props.triggerInDelete(this.state.in)} />
         </div>
-        <div className='title-container'>
-          <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
-          <InnovationModal triggerInSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
-        </div>
+        <Tooltip title={this.state.in.getDescription} >
+          <div className='title-container'>
+            <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
+            <InnovationModal triggerInSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
+          </div>
+        </Tooltip>
         <div className='priority'>
           <ArrowUpward style={{ color: getPriorityColor(this.state.in.getPriority), width: 15 }} />
         </div>

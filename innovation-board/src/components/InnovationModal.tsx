@@ -35,8 +35,6 @@ class InnovationModal extends Component<ModalProps, ModalState> {
   componentWillReceiveProps(props: ModalProps) {
     if (this.state.open !== props.open) {
       this.setState({ open: props.open });
-      console.log(this.state.open);
-      console.log(this.props.in.getTitle);
     }
   }
 

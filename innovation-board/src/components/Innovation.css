@@ -7,6 +7,10 @@
     box-shadow: 2px 3px 8px #000000;
 }
 
+/* .innovation:hover {
+    box-shadow: 2px 3px 8px rgba(255, 255, 255, 0.1);
+} */
+
 .innovation .line {
     width: 100%;
     height: 0.5vh;
@@ -22,13 +26,17 @@
 }
 
 .innovation .priority {
+    align-self: right;
     display: flex;
-    align-items: right;
+    justify-content: flex-start;
+    margin-left: 1px;
 }
 
 .innovation .clear {
+    align-self: right;
     display: flex;
-    align-items: right;
+    justify-content: flex-end;
+    margin-right: 2px;
 }
 
 .innovation .title {

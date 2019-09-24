@@ -48,7 +48,7 @@ export default class App extends Component<{}, AppState> {
         <div className="createTeam">
           <div className="team">
             <label className="add">Create Team</label>
-            <AddBox style={{ width: 30, paddingRight: 10 }} onClick={e => this.addNewTeam()} />
+            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.addNewTeam()} />
           </div>
         </div>
         <MuiThemeProvider theme={theme}>

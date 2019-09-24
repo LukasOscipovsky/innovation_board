@@ -70,7 +70,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <label className='title'>{upper}</label>
-          <AddBox style={{ width: 30, paddingRight: 10 }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
+          <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
           <InnovationModal triggerInSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }} open={this.state.modalOpened} in={this.state.innovation} />
         </div>
         <div className='innovationContainer'>
