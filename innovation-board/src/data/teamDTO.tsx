@@ -5,16 +5,24 @@ import { JsonObject, JsonProperty } from "json2typescript";
 export default class TeamDTO {
 
   @JsonProperty("teamName", String)
-  private teamName: String | undefined = undefined;
+  private teamName: string | undefined = undefined;
 
   @JsonProperty("innovations", [InnovationDTO])
   private innovations: Array<InnovationDTO> | undefined = undefined;
+
+  set setTeamName(teamName: string | undefined) {
+    this.teamName = teamName;
+  }
 
   get getTeamName() {
     return this.teamName === undefined ? '' : this.teamName;
   }
 
-  get getInnovations(): Array<InnovationDTO> | undefined {
+  set setInnovations(innovations: Array<InnovationDTO> | undefined) {
+    this.innovations = innovations;
+  }
+
+  get getInnovations(): Array<InnovationDTO> {
     return this.innovations === undefined ? [] : this.innovations;
   }
 }

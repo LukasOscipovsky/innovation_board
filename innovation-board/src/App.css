@@ -54,6 +54,30 @@
   padding: 10px;
 }
 
+.app .createTeam {
+  background: #242d34;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.app .createTeam .team {
+  background: #01FF70;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 15vh;
+  padding: 7px;
+}
+
+.app .createTeam .team .add {
+  font-family: Trim,'DAZN-Bold',Oscine;
+  font-weight: 40;
+  font-size: 10;
+  margin-left: 2px;
+}
+
 @font-face {
   font-family: 'DAZN-Bold';
   font-style: normal;

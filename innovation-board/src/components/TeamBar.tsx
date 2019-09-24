@@ -46,11 +46,19 @@ class TeamBar extends Component<TeamProps, TeamState> {
     this.setState({ team: this.props.team });
   }
 
+  deleteInnovation(innovation: InnovationDTO) {
+    this.props.team.setInnovations = this.props.team.getInnovations.filter(t => !(t.getTitle === innovation.getTitle));
+
+    saveTeam(this.props.team);
+
+    this.setState({ team: this.props.team });
+  }
+
   compsFromList() {
     if (this.props.team.getInnovations !== undefined) {
       return this.props.team.getInnovations
         .map((i) => {
-          return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} />)
+          return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />)
         });
     }
   }

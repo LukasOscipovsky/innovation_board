@@ -3,10 +3,12 @@ import InnovationDTO from '../data/innovationDTO';
 import InnovationModal from './InnovationModal';
 import { getPriorityColor, getStatusColor } from '../colors/colors'
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import Clear from '@material-ui/icons/Clear';
 
 interface IProps {
   in: InnovationDTO;
   triggerInSave(innovation: InnovationDTO): void
+  triggerInDelete(innovation: InnovationDTO): void
 }
 
 interface IState {
@@ -31,6 +33,9 @@ class Innovation extends Component<IProps, IState> {
 
     return (
       <div className='innovation'>
+        <div className='clear'>
+          <Clear style={{ color: '#FF4136', width: 15 }} onClick={e => this.props.triggerInDelete(this.state.in)} />
+        </div>
         <div className='title-container'>
           <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
           <InnovationModal triggerInSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />

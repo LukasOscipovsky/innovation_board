@@ -15,13 +15,18 @@
 }
 
 .innovation .title-container {
-    height: 6.8vh;
+    height: 4.3vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .innovation .priority {
+    display: flex;
+    align-items: right;
+}
+
+.innovation .clear {
     display: flex;
     align-items: right;
 }
