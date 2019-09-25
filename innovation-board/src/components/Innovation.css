@@ -1,28 +1,30 @@
 .innovation {
     background:     rgba(255, 255, 255, 0.1); 
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
+    display: block;
     margin-bottom: auto;
     box-shadow: 2px 3px 8px #000000;
 }
 
-/* .innovation:hover {
-    box-shadow: 2px 3px 8px rgba(255, 255, 255, 0.1);
-} */
+.innovation:hover {
+    opacity: 1;
+}
 
 .innovation .line {
     width: 100%;
-    height: 0.5vh;
+    height: 0.4vh;
     display: block;
     align-self: flex-end;
 }
 
 .innovation .title-container {
-    height: 4.3vh;
-    display: flex;
+    height: 2.1vh;
+    display: block;
     justify-content: center;
-    align-items: center;
+    padding: 3px;
+    overflow: hidden;
+    color: white;
+    text-overflow: ellipsis;
 }
 
 .innovation .priority {
@@ -36,14 +38,13 @@
     align-self: right;
     display: flex;
     justify-content: flex-end;
-    margin-right: 2px;
+    margin-right: 1.5px;
 }
 
 .innovation .title {
     font-family: Trim,'DAZN-Bold',Oscine;
     font-style: bold;
     font-weight: 700;
-    font-size: 12px;
-    color: white;
+    font-size: 14px;
     cursor: pointer;
 }

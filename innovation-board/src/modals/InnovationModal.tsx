@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InnovationDTO from '../data/innovationDTO';
 
-interface ModalState {
+interface InnovationModalState {
   open: boolean;
   title: string;
   description: string;
@@ -16,13 +16,13 @@ interface ModalState {
   priority: number;
 }
 
-interface ModalProps {
+interface InnovationModalProps {
   in: InnovationDTO;
   open: boolean;
-  triggerInSave(innovation: InnovationDTO): void
+  triggerInInnovationSave(innovation: InnovationDTO): void
 }
 
-class InnovationModal extends Component<ModalProps, ModalState> {
+class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
   componentWillMount() {
     this.setState({
       title: this.props.in.getTitle,
@@ -32,7 +32,7 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     })
   }
 
-  componentWillReceiveProps(props: ModalProps) {
+  componentWillReceiveProps(props: InnovationModalProps) {
     if (this.state.open !== props.open) {
       this.setState({ open: props.open });
     }
@@ -47,7 +47,7 @@ class InnovationModal extends Component<ModalProps, ModalState> {
     this.props.in.setDescription = this.state.description;
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
-    this.props.triggerInSave(this.props.in);
+    this.props.triggerInInnovationSave(this.props.in);
   }
 
   render() {

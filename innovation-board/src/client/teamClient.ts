@@ -13,3 +13,8 @@ export const saveTeam = async (team: TeamDTO) => {
   return await axios.put('http://localhost:8080/team', team)
     .then(r => r, err => { console.log(err) })
 }
+
+export const deleteTeam = async (teamName: string) => {
+  return await axios.delete('http://localhost:8080/team/' + teamName)
+    .then(r => r, err => { console.log(err) })
+}

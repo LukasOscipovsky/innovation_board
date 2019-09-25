@@ -58,6 +58,16 @@ class InnovationClient {
             });
         });
     }
+    deleteTeam(_teamName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let client = yield mongoDbClient_1.getMongoConnection();
+            client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).deleteOne({ teamName: _teamName }, (err, innovationsDoc) => {
+                if (err)
+                    throw err;
+                console.log('Deletedteam with title: ' + _teamName);
+            });
+        });
+    }
 }
 InnovationClient.dbName = 'innovationboard';
 InnovationClient.collectionName = 'team';

@@ -55,4 +55,16 @@ export default class InnovationClient {
       }
     )
   }
+
+  async deleteTeam(_teamName: string) {
+    let client: any = await getMongoConnection();
+
+    client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).deleteOne(
+      { teamName: _teamName },
+      (err, innovationsDoc) => {
+        if (err) throw err;
+        console.log('Deletedteam with title: ' + _teamName);
+      }
+    )
+  }
 }

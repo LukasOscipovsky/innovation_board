@@ -1,0 +1,33 @@
+.ModalTitle {
+    font-family: Trim,'DAZN-Bold',Oscine;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #242d34;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.ModalActions {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+.TextFieldDiv {
+    width: 90%;
+}
+
+.InnovationModal {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 10%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

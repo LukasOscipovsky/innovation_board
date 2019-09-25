@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
 import InnovationDTO from '../data/innovationDTO';
-import { saveTeam } from '../client/teamClient';
-import InnovationModal from './InnovationModal';
+import { saveTeam, deleteTeam } from '../client/teamClient';
+import InnovationModal from '../modals/InnovationModal';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
+import Clear from '@material-ui/icons/Clear';
 
 interface TeamProps {
   team: TeamDTO
@@ -69,9 +70,14 @@ class TeamBar extends Component<TeamProps, TeamState> {
     return (
       <div className='teamBar'>
         <div className='titleContainer'>
-          <label className='title'>{upper}</label>
-          <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
-          <InnovationModal triggerInSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }} open={this.state.modalOpened} in={this.state.innovation} />
+          <div className='clear'>
+            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => deleteTeam(this.state.team.getTeamName)} />
+          </div>
+          <div className='title'>
+            <label className='name'>{upper}</label>
+            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
+            <InnovationModal triggerInInnovationSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }} open={this.state.modalOpened} in={this.state.innovation} />
+          </div>
         </div>
         <div className='innovationContainer'>
           {this.compsFromList()}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import InnovationDTO from '../data/innovationDTO';
-import InnovationModal from './InnovationModal';
+import InnovationModal from '../modals/InnovationModal';
 import { getPriorityColor, getStatusColor } from '../colors/colors'
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Clear from '@material-ui/icons/Clear';
@@ -18,7 +18,6 @@ interface IState {
 }
 
 class Innovation extends Component<IProps, IState> {
-
   constructor(props: any) {
     super(props);
 
@@ -35,12 +34,12 @@ class Innovation extends Component<IProps, IState> {
     return (
       <div className='innovation'>
         <div className='clear'>
-          <Clear style={{ color: '#FF4136', width: 15 }} onClick={e => this.props.triggerInDelete(this.state.in)} />
+          <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.props.triggerInDelete(this.state.in)} />
         </div>
-        <Tooltip title={this.state.in.getDescription} >
+        <Tooltip title={this.state.in.getTitle} >
           <div className='title-container'>
             <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
-            <InnovationModal triggerInSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
+            <InnovationModal triggerInInnovationSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
           </div>
         </Tooltip>
         <div className='priority'>

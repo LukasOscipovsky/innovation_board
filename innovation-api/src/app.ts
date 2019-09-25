@@ -33,6 +33,10 @@ app.get('/team/:teamName', (req, res) => {
 
   client.createTeam(team);
   res.send('Team created/updated');
+}).delete('/team/:teamName', (req, res) => {
+
+  client.deleteTeam(req.params.teamName);
+  res.send('Deleted team');
 }).listen(port, err => {
   if (err) {
     return console.error(err);
