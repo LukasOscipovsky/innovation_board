@@ -1,6 +1,6 @@
 import TeamDTO from '../data/teamDTO';
 import InnovationDTO from '../data/innovationDTO';
-import { getJsonConverter } from '../mapper/JsonConverter'
+import { getJsonConverter } from '../mapper/jsonConverter'
 import { getMongoConnection } from '../client/mongoDbClient';
 
 export default class InnovationClient {
