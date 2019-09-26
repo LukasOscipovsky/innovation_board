@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './assets/DAZN-hero-updated.png';
 import './App.css';
-import TeamDTO from './data/TeamDTO';
+import TeamDTO from './data/teamDTO';
 import TeamBar from './components/TeamBar';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
 import TeamModal from './modals/TeamModal';
