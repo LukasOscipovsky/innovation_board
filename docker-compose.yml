@@ -18,7 +18,7 @@ services:
     ports:
         - "8080:8080"  
     links:
-        - mongo        
+      - mongo        
     #container_name: nesspoll-users   
     depends_on:
       - mongo 
@@ -31,9 +31,6 @@ services:
     #user: root
     ports:
       - "3000:3000"      
-    #container_name: nesspoll
-    #depends_on:
-      #- "nesspoll-users"
   
 networks:
     backend:
