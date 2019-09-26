@@ -6,4 +6,4 @@ jsonConvert.ignorePrimitiveChecks = false; // don't allow assigning number to st
 jsonConvert.valueCheckingMode = json2typescript_1.ValueCheckingMode.DISALLOW_NULL;
 function getJsonConverter() { return jsonConvert; }
 exports.getJsonConverter = getJsonConverter;
-//# sourceMappingURL=JsonConverter.js.map
+//# sourceMappingURL=jsonConverter.js.map

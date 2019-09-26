@@ -8,16 +8,22 @@ services:
       #user: root
       #volumes: - mongodata:/data/db
     ports:        
-        - "27017:27018"     
+        - "2222:27017"  
+    networks: 
+      - backend        
   api:
     build:
       context: ./innovation-api  
       #user: root
     ports:
-        - "8080:8080"     
+        - "8080:8080"  
+    links:
+        - mongo        
     #container_name: nesspoll-users   
     depends_on:
-      - "mongo"    
+      - mongo 
+    networks: 
+      - backend      
   board:
     build:
       context: ./innovation-board
@@ -29,4 +35,6 @@ services:
     #depends_on:
       #- "nesspoll-users"
   
-    
+networks:
+    backend:
+        driver: "bridge"  

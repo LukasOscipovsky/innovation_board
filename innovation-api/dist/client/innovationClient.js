@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const teamDTO_1 = __importDefault(require("../data/teamDTO"));
-const JsonConverter_1 = require("../mapper/JsonConverter");
+const jsonConverter_1 = require("../mapper/jsonConverter");
 const mongoDbClient_1 = require("../client/mongoDbClient");
 class InnovationClient {
     getAll() {
@@ -25,7 +25,7 @@ class InnovationClient {
                 .then(r => {
                 var teamArray = [];
                 r.forEach(element => {
-                    teamArray.push(JsonConverter_1.getJsonConverter().deserializeObject(element, teamDTO_1.default));
+                    teamArray.push(jsonConverter_1.getJsonConverter().deserializeObject(element, teamDTO_1.default));
                 });
                 return teamArray;
             }).catch(function (err) {
@@ -41,7 +41,7 @@ class InnovationClient {
                 .collection(InnovationClient.collectionName)
                 .findOne({ teamName: teamName })
                 .then(r => {
-                return JsonConverter_1.getJsonConverter().deserializeObject(r, teamDTO_1.default);
+                return jsonConverter_1.getJsonConverter().deserializeObject(r, teamDTO_1.default);
             }).catch(function (err) {
                 console.log(err);
             });

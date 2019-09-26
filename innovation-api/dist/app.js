@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.get('/team/:teamName', (req, res) => {
     let team = client.getTeam(req.params.teamName);
+    console.log('Received request to get team with name: ' + req.params.teamName);
     team.then(t => {
         res.json(t);
     }).catch(function (err) {
@@ -22,6 +23,7 @@ app.get('/team/:teamName', (req, res) => {
     });
 }).get('/team', (req, res) => {
     let teams = client.getAll();
+    console.log('Received request to get teams');
     teams.then(t => {
         res.json(t);
     }).catch(function (err) {
@@ -29,9 +31,11 @@ app.get('/team/:teamName', (req, res) => {
     });
 }).put('/team', (req, res) => {
     let team = jsonConverter_1.getJsonConverter().deserializeObject(req.body, teamDTO_1.default);
+    console.log('Received request to create team');
     client.createTeam(team);
     res.send('Team created/updated');
 }).delete('/team/:teamName', (req, res) => {
+    console.log('Received request to delete team');
     client.deleteTeam(req.params.teamName);
     res.send('Deleted team');
 }).listen(port, err => {

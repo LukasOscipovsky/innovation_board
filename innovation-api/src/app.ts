@@ -15,6 +15,8 @@ app.use(cors())
 app.get('/team/:teamName', (req, res) => {
   let team: Promise<TeamDTO> = client.getTeam(req.params.teamName);
 
+  console.log('Received request to get team with name: ' + req.params.teamName);
+
   team.then(t => {
     res.json(t)
   }).catch(function (err) {
@@ -22,6 +24,8 @@ app.get('/team/:teamName', (req, res) => {
   });
 }).get('/team', (req, res) => {
   let teams: Promise<TeamDTO[]> = client.getAll();
+
+  console.log('Received request to get teams');
 
   teams.then(t => {
     res.json(t)
@@ -31,9 +35,13 @@ app.get('/team/:teamName', (req, res) => {
 }).put('/team', (req, res) => {
   let team: TeamDTO = getJsonConverter().deserializeObject(req.body, TeamDTO);
 
+  console.log('Received request to create team');
+
   client.createTeam(team);
   res.send('Team created/updated');
 }).delete('/team/:teamName', (req, res) => {
+
+  console.log('Received request to delete team');
 
   client.deleteTeam(req.params.teamName);
   res.send('Deleted team');
