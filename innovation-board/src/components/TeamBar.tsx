@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
-import TeamDTO from '../data/teamDTO';
+import TeamDTO from '../data/TeamDTO';
 import InnovationDTO from '../data/InnovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';

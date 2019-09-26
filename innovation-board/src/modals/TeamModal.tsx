@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import TeamDTO from '../data/teamDTO';
+import TeamDTO from '../data/TeamDTO';
 
 interface TeamModalState {
     open: boolean;
