@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
@@ -14,7 +14,6 @@ interface TeamProps {
 interface TeamState {
   team: TeamDTO;
   modalOpened: boolean;
-  innovation: InnovationDTO;
 }
 
 class TeamBar extends Component<TeamProps, TeamState> {
@@ -23,7 +22,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
     this.setState({
       team: this.props.team,
       modalOpened: false,
-      innovation: new InnovationDTO()
     })
   }
 
@@ -65,7 +63,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   render() {
-    let upper = this.props.team.getTeamName.toUpperCase();
+    let upper: string = this.props.team.getTeamName.toUpperCase();
 
     return (
       <div className='teamBar'>
@@ -75,8 +73,12 @@ class TeamBar extends Component<TeamProps, TeamState> {
           </div>
           <div className='title'>
             <label className='name'>{upper}</label>
-            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true, innovation: new InnovationDTO() })} />
-            <InnovationModal triggerInInnovationSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }} open={this.state.modalOpened} in={this.state.innovation} />
+            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true })} />
+            <InnovationModal
+              triggerInInnovationClose={() => this.setState({ modalOpened: false })}
+              triggerInInnovationSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }}
+              open={this.state.modalOpened}
+              in={new InnovationDTO()} />
           </div>
         </div>
         <div className='innovationContainer'>

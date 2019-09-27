@@ -20,6 +20,7 @@ interface InnovationModalProps {
   in: InnovationDTO;
   open: boolean;
   triggerInInnovationSave(innovation: InnovationDTO): void
+  triggerInInnovationClose(): void
 }
 
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
@@ -36,10 +37,11 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     if (this.state.open !== props.open) {
       this.setState({ open: props.open });
     }
+    console.log(this.props.in);
   }
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.props.triggerInInnovationClose();
   };
 
   handleSave = () => {

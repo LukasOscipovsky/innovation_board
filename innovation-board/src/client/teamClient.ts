@@ -2,7 +2,7 @@ import axios from 'axios';
 import TeamDTO from '../data/teamDTO';
 import jsonConverter from '../mapper/jsonConverter';
 
-const apiIp: string = '10.219.227.17:5555';
+const apiIp: string = 'localhost:8080';
 
 export const getTeams = async () => {
   return await axios.get('http://' + apiIp + '/team')

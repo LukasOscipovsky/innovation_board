@@ -18,7 +18,7 @@
 }
 
 .innovation .title-container {
-    height: 2.1vh;
+    height: 1.9vh;
     display: block;
     justify-content: center;
     padding: 3px;
@@ -45,6 +45,6 @@
     font-family: Trim,'DAZN-Bold',Oscine;
     font-style: bold;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
 }

@@ -20,7 +20,7 @@ export default class App extends Component<{}, AppState> {
     super(props);
     this.state = {
       modalOpened: false,
-      teams: []
+      teams: [],
     }
   }
 

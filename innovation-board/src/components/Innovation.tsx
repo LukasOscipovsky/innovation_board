@@ -36,10 +36,14 @@ class Innovation extends Component<IProps, IState> {
         <div className='clear'>
           <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.props.triggerInDelete(this.state.in)} />
         </div>
-        <Tooltip title={this.state.in.getTitle} >
+        <Tooltip title={this.state.in.getTitle}>
           <div className='title-container'>
             <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
-            <InnovationModal triggerInInnovationSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }} open={this.state.open} in={this.state.in} />
+            <InnovationModal
+              triggerInInnovationClose={() => this.setState({ open: false })}
+              triggerInInnovationSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }}
+              open={this.state.open}
+              in={this.state.in} />
           </div>
         </Tooltip>
         <div className='priority'>

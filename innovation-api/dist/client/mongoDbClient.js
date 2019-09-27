@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongo = require("mongodb");
-const url = 'mongodb://127.0.0.1:2222';
+const url = 'mongodb://localhost:27017';
 const mongoClient = mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 function getMongoConnection() {
     return __awaiter(this, void 0, void 0, function* () { return yield mongoClient; });
