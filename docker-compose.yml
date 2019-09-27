@@ -29,6 +29,8 @@ services:
       context: ./innovation-board
     #privileged: true
     #user: root
+    networks: 
+      - backend
     ports:
       - "3000:3000"      
   
