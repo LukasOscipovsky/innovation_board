@@ -1,4 +1,4 @@
-import InnovationDTO from './innovationDTO'
+import InnovationDTO from './InnovationDTO'
 import { JsonObject, JsonProperty } from "json2typescript";
 
 @JsonObject("Team")
