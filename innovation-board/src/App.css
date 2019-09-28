@@ -2,9 +2,10 @@
 
 .app {
   text-align: center;
-  position: center;
-  display: block;
-  width: 100%
+  position: absolute;
+  background: #242d34;
+  width: 100%;
+  height: 100%;
 }
 
 .app .appLogo {
@@ -17,29 +18,16 @@
   width: 10vh;
   height: 10vh;
   margin-top: 20px;
-  margin-right: 10px;
-}
-
-.app .mainDiv {
-  background: #242d34;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -10;
-  text-align: center;
-  align-items: center;
-  transition: all 500ms ease;
 }
 
 .app .whiteLine {
-  width: 100%;
+
   background: white;
   height: 0.5vh;
   display: block;
 }
 
 .app .boardHeader {
-  width: 100%;
   background-color: #242d34;
   min-height: 10vh;
   display: flex;
@@ -63,7 +51,7 @@
   right: 0;
   display: flex;
   flex-direction: row;
-  margin-right:15px;
+  margin-right: 15px;
   margin-bottom: 15px;
 }
 
