@@ -12,12 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const json2typescript_1 = require("json2typescript");
 let InnovationDTO = class InnovationDTO {
     constructor() {
+        this.uuid = undefined;
         this.title = undefined;
         this.description = undefined;
         this.status = undefined;
         this.priority = undefined;
     }
 };
+__decorate([
+    json2typescript_1.JsonProperty("uuid", String),
+    __metadata("design:type", String)
+], InnovationDTO.prototype, "uuid", void 0);
 __decorate([
     json2typescript_1.JsonProperty("title", String),
     __metadata("design:type", String)

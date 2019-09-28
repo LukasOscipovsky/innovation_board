@@ -4,6 +4,7 @@
   text-align: center;
   position: center;
   display: block;
+  width: 100%
 }
 
 .app .appLogo {
@@ -15,7 +16,8 @@
 .app .boardHeader .appDaznLogo {
   width: 10vh;
   height: 10vh;
-  padding-top: 20px;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .app .mainDiv {

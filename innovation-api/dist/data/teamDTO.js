@@ -16,10 +16,15 @@ const innovationDTO_1 = __importDefault(require("./innovationDTO"));
 const json2typescript_1 = require("json2typescript");
 let TeamDTO = class TeamDTO {
     constructor() {
+        this.uuid = undefined;
         this.teamName = undefined;
         this.innovations = undefined;
     }
 };
+__decorate([
+    json2typescript_1.JsonProperty("uuid", String),
+    __metadata("design:type", String)
+], TeamDTO.prototype, "uuid", void 0);
 __decorate([
     json2typescript_1.JsonProperty("teamName", String),
     __metadata("design:type", String)

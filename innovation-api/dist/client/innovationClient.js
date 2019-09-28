@@ -34,12 +34,12 @@ class InnovationClient {
             ;
         });
     }
-    getTeam(teamName) {
+    getTeam(uuid) {
         return __awaiter(this, void 0, void 0, function* () {
             let client = yield mongoDbClient_1.getMongoConnection();
             return yield client.db(InnovationClient.dbName)
                 .collection(InnovationClient.collectionName)
-                .findOne({ teamName: teamName })
+                .findOne({ uuid: uuid })
                 .then(r => {
                 return jsonConverter_1.getJsonConverter().deserializeObject(r, teamDTO_1.default);
             }).catch(function (err) {
@@ -51,20 +51,20 @@ class InnovationClient {
         return __awaiter(this, void 0, void 0, function* () {
             let client = yield mongoDbClient_1.getMongoConnection();
             var innovations = team.innovations;
-            client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).findOneAndUpdate({ teamName: team.teamName }, { $set: { innovations } }, { upsert: true, new: true, runValidators: true }, (err, innovationsDoc) => {
+            client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).findOneAndUpdate({ uuid: team.uuid }, { $set: { teamName: team.teamName, innovations } }, { upsert: true, new: true, runValidators: true }, (err, innovationsDoc) => {
                 if (err)
                     throw err;
                 console.log('Created or updated team with title: ' + team.teamName);
             });
         });
     }
-    deleteTeam(_teamName) {
+    deleteTeam(_uuid) {
         return __awaiter(this, void 0, void 0, function* () {
             let client = yield mongoDbClient_1.getMongoConnection();
-            client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).deleteOne({ teamName: _teamName }, (err, innovationsDoc) => {
+            client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).deleteOne({ uuid: _uuid }, (err, innovationsDoc) => {
                 if (err)
                     throw err;
-                console.log('Deletedteam with title: ' + _teamName);
+                console.log('Deleted team with title: ' + _uuid);
             });
         });
     }

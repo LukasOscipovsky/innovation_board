@@ -28,11 +28,11 @@ export default class InnovationClient {
       });;
   }
 
-  async getTeam(teamName: string): Promise<TeamDTO> {
+  async getTeam(uuid: string): Promise<TeamDTO> {
     let client: any = await getMongoConnection();
     return await client.db(InnovationClient.dbName)
       .collection(InnovationClient.collectionName)
-      .findOne({ teamName: teamName })
+      .findOne({ uuid: uuid })
       .then(r => {
         return getJsonConverter().deserializeObject(r, TeamDTO);
       }).catch(function (err) {
@@ -46,8 +46,8 @@ export default class InnovationClient {
     var innovations: Array<InnovationDTO> = team.innovations;
 
     client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).findOneAndUpdate(
-      { teamName: team.teamName },
-      { $set: { innovations } },
+      { uuid: team.uuid },
+      { $set: { teamName: team.teamName, innovations } },
       { upsert: true, new: true, runValidators: true },
       (err, innovationsDoc) => {
         if (err) throw err;
@@ -56,14 +56,14 @@ export default class InnovationClient {
     )
   }
 
-  async deleteTeam(_teamName: string) {
+  async deleteTeam(_uuid: string) {
     let client: any = await getMongoConnection();
 
     client.db(InnovationClient.dbName).collection(InnovationClient.collectionName).deleteOne(
-      { teamName: _teamName },
+      { uuid: _uuid },
       (err, innovationsDoc) => {
         if (err) throw err;
-        console.log('Deletedteam with title: ' + _teamName);
+        console.log('Deleted team with title: ' + _uuid);
       }
     )
   }
