@@ -69,7 +69,9 @@ export default class App extends Component<{}, AppState> {
           </div>
         </div>
         <MuiThemeProvider theme={theme}>
-          {this.state.teams.map(t => <TeamBar team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}
+          <div className="teams">
+            {this.state.teams.map(t => <TeamBar team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}
+          </div>
         </MuiThemeProvider>
       </div>
     );
