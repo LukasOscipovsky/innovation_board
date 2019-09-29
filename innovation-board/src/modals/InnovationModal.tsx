@@ -23,6 +23,13 @@ interface InnovationModalProps {
   triggerInInnovationClose(): void
 }
 
+const initialState = {
+  title: '',
+  description: '',
+  status: 0,
+  priority: 0
+}
+
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
   componentWillMount() {
     this.setState({
@@ -50,6 +57,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
     this.props.triggerInInnovationSave(this.props.in);
+    this.setState(initialState);
   }
 
   render() {

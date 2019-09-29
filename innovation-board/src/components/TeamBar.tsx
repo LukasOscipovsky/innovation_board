@@ -33,8 +33,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
       return;
     }
 
-    console.log(innovation.getTitle)
-
     let inToUpdate: InnovationDTO | undefined = this.props.team.getInnovations.find(t => t.getUuid === innovation.getUuid);
 
     if (inToUpdate === undefined) {

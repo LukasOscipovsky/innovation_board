@@ -57,8 +57,8 @@ export default class App extends Component<{}, AppState> {
     return (
       <div className="app">
         <header className="boardHeader">
-          <p className="daznTitle">DAZN Košice - Innovation Board</p>
           <img src={logo} className="appDaznLogo" alt="logo" />
+          <p className="daznTitle">DAZN Košice - Innovation Board</p>
         </header>
         <div className="whiteLine" />
         <div className="createTeam">
