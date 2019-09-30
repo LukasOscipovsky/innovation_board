@@ -6,7 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 
 interface InnovationModalState {
   open: boolean;
@@ -21,6 +21,13 @@ interface InnovationModalProps {
   open: boolean;
   triggerInInnovationSave(innovation: InnovationDTO): void
   triggerInInnovationClose(): void
+}
+
+const initialState = {
+  title: '',
+  description: '',
+  status: 0,
+  priority: 0
 }
 
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
@@ -50,6 +57,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
     this.props.triggerInInnovationSave(this.props.in);
+    this.setState(initialState);
   }
 
   render() {

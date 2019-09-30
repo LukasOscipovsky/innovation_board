@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import InnovationModal from '../modals/InnovationModal';
 import { getPriorityColor, getStatusColor } from '../colors/colors'
 import ArrowUpward from '@material-ui/icons/ArrowUpward';

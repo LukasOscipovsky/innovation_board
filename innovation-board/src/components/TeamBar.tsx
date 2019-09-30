@@ -9,6 +9,7 @@ import Clear from '@material-ui/icons/Clear';
 
 interface TeamProps {
   team: TeamDTO
+  triggerTeamsUpdate(team: TeamDTO): void
 }
 
 interface TeamState {
@@ -32,7 +33,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       return;
     }
 
-    let inToUpdate: InnovationDTO | undefined = this.props.team.getInnovations.find(t => t.getTitle === innovation.getTitle);
+    let inToUpdate: InnovationDTO | undefined = this.props.team.getInnovations.find(t => t.getUuid === innovation.getUuid);
 
     if (inToUpdate === undefined) {
       this.props.team.getInnovations.push(innovation);
@@ -46,7 +47,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   deleteInnovation(innovation: InnovationDTO) {
-    this.props.team.setInnovations = this.props.team.getInnovations.filter(t => !(t.getTitle === innovation.getTitle));
+    this.props.team.setInnovations = this.props.team.getInnovations.filter(t => t.getUuid !== innovation.getUuid);
 
     saveTeam(this.props.team);
 
@@ -62,6 +63,12 @@ class TeamBar extends Component<TeamProps, TeamState> {
     }
   }
 
+  deleteTeam() {
+    deleteTeam(this.state.team.getUuid);
+
+    this.props.triggerTeamsUpdate(this.state.team);
+  }
+
   render() {
     let upper: string = this.props.team.getTeamName.toUpperCase();
 
@@ -69,7 +76,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <div className='clear'>
-            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => deleteTeam(this.state.team.getTeamName)} />
+            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.deleteTeam()} />
           </div>
           <div className='title'>
             <label className='name'>{upper}</label>

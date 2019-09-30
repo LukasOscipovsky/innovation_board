@@ -1,7 +1,11 @@
 import { JsonObject, JsonProperty } from "json2typescript";
+const uuidv4 = require('uuid/v4');
 
 @JsonObject("Innovation")
 export default class InnovationDTO {
+
+  @JsonProperty("uuid", String)
+  private uuid: string | undefined = undefined
 
   @JsonProperty("title", String)
   private title: string | undefined = undefined;
@@ -14,6 +18,14 @@ export default class InnovationDTO {
 
   @JsonProperty("priority", Number)
   private priority: number | undefined = undefined;
+
+  constructor() {
+    this.uuid = uuidv4();
+  }
+
+  get getUuid(): string | undefined {
+    return this.uuid;
+  }
 
   get getTitle(): string {
     return this.title === undefined ? '' : this.title;

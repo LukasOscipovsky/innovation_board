@@ -32,14 +32,33 @@ export default class App extends Component<{}, AppState> {
 
   addNewTeam(team: TeamDTO) {
     saveTeam(team);
+
+    this.setState(state => {
+      const updatedTeams: Array<TeamDTO> = [...state.teams, team];
+
+      return {
+        teams: updatedTeams
+      }
+    }
+    );
+  }
+
+  deleteTeam(team: TeamDTO) {
+    this.setState(state => {
+      const updatedTeams = this.state.teams.filter(t => t.getUuid !== team.getUuid)
+
+      return {
+        teams: updatedTeams
+      }
+    })
   }
 
   render() {
     return (
       <div className="app">
         <header className="boardHeader">
-          <p className="daznTitle">DAZN Košice - Innovation Board</p>
           <img src={logo} className="appDaznLogo" alt="logo" />
+          <p className="daznTitle">DAZN Košice - Innovation Board</p>
         </header>
         <div className="whiteLine" />
         <div className="createTeam">
@@ -50,8 +69,8 @@ export default class App extends Component<{}, AppState> {
           </div>
         </div>
         <MuiThemeProvider theme={theme}>
-          <div className="mainDiv">
-            {this.state.teams.map(t => <TeamBar team={t} />)}
+          <div className="teams">
+            {this.state.teams.map(t => <TeamBar team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}
           </div>
         </MuiThemeProvider>
       </div>

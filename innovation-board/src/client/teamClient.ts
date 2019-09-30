@@ -15,7 +15,7 @@ export const saveTeam = async (team: TeamDTO) => {
     .then(r => r, err => { console.log(err) })
 }
 
-export const deleteTeam = async (teamName: string) => {
-  return await axios.delete('http://' + apiIp + '/team/' + teamName)
+export const deleteTeam = async (uuid: string | undefined) => {
+  return await axios.delete('http://' + apiIp + '/team/' + uuid)
     .then(r => r, err => { console.log(err) })
 }
