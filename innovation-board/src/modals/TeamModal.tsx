@@ -14,6 +14,10 @@ interface TeamModalProps {
     triggerInTeamSave(team: TeamDTO): void
 }
 
+const initialState = {
+    name: ''
+}
+
 class TeamModal extends Component<TeamModalProps, TeamModalState> {
     componentWillMount() {
         this.setState({
@@ -36,6 +40,7 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
         team.setTeamName = this.state.name;
         team.setInnovations = [];
         this.props.triggerInTeamSave(team);
+        this.setState(initialState);
     }
 
     render() {
