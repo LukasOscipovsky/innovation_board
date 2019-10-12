@@ -44,7 +44,6 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     if (this.state.open !== props.open) {
       this.setState({ open: props.open });
     }
-    console.log(this.props.in);
   }
 
   handleClose = () => {

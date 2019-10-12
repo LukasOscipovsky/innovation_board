@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
+import DeleteTeamModal from '../modals/DeleteTeamModal';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
 import Clear from '@material-ui/icons/Clear';
 
@@ -14,7 +15,8 @@ interface TeamProps {
 
 interface TeamState {
   team: TeamDTO;
-  modalOpened: boolean;
+  innModalOpened: boolean;
+  deleteModalOpened: boolean;
 }
 
 class TeamBar extends Component<TeamProps, TeamState> {
@@ -22,7 +24,8 @@ class TeamBar extends Component<TeamProps, TeamState> {
   componentWillMount() {
     this.setState({
       team: this.props.team,
-      modalOpened: false,
+      innModalOpened: false,
+      deleteModalOpened: false
     })
   }
 
@@ -76,15 +79,19 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <div className='clear'>
-            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.deleteTeam()} />
+            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.setState({ deleteModalOpened: true })} />
+            <DeleteTeamModal
+              open={this.state.deleteModalOpened}
+              triggerClose={() => this.setState({ deleteModalOpened: false })}
+              triggerDelete={() => { this.setState({ deleteModalOpened: false }); this.deleteTeam() }} />
           </div>
           <div className='title'>
             <label className='name'>{upper}</label>
-            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true })} />
+            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ innModalOpened: true })} />
             <InnovationModal
-              triggerInInnovationClose={() => this.setState({ modalOpened: false })}
-              triggerInInnovationSave={innovation => { this.setState({ modalOpened: false }); this.saveTeam(innovation) }}
-              open={this.state.modalOpened}
+              triggerInInnovationClose={() => this.setState({ innModalOpened: false })}
+              triggerInInnovationSave={innovation => { this.setState({ innModalOpened: false }); this.saveTeam(innovation) }}
+              open={this.state.innModalOpened}
               in={new InnovationDTO()} />
           </div>
         </div>
