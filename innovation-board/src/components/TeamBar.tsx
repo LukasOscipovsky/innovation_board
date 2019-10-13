@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
 import DeleteTeamModal from '../modals/DeleteTeamModal';
@@ -14,19 +14,29 @@ interface TeamProps {
 }
 
 interface TeamState {
+  innsToRender: Array<InnovationDTO>,
   team: TeamDTO;
   innModalOpened: boolean;
   deleteModalOpened: boolean;
 }
 
+const toAdd: number = 5;
+
 class TeamBar extends Component<TeamProps, TeamState> {
+  private index: number = 5;
+  private next: number = 0;
 
   componentWillMount() {
     this.setState({
+      innsToRender: [],
       team: this.props.team,
       innModalOpened: false,
-      deleteModalOpened: false
+      deleteModalOpened: false,
     })
+
+    setInterval(() => {
+      this.setInnovationsToRender();
+    }, 5000);
   }
 
   saveTeam(innovation: InnovationDTO) {
@@ -58,11 +68,25 @@ class TeamBar extends Component<TeamProps, TeamState> {
   }
 
   compsFromList() {
+    return this.state.innsToRender.map((i) => {
+      return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />)
+    });
+  }
+
+  setInnovationsToRender() {
     if (this.props.team.getInnovations !== undefined) {
-      return this.props.team.getInnovations
-        .map((i) => {
-          return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />)
-        });
+      if (this.index >= this.props.team.getInnovations.length) {
+        this.next = 0;
+        this.index = toAdd;
+      } else {
+        this.next = this.next + toAdd;
+        this.index = this.index + toAdd;
+      }
+
+      let x = this.props.team.getInnovations.slice(this.next, this.index);
+
+      this.setState({ innsToRender: [] });
+      this.setState({ innsToRender: x });
     }
   }
 

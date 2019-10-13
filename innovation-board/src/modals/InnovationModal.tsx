@@ -33,6 +33,7 @@ const initialState = {
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
   componentWillMount() {
     this.setState({
+      open: false,
       title: this.props.in.getTitle,
       description: this.props.in.getDescription,
       status: this.props.in.getStatus,
