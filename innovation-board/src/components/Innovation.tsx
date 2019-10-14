@@ -27,6 +27,12 @@ class Innovation extends Component<IProps, IState> {
     }
   }
 
+  UNSAFE_componentWillReceiveProps(props: IProps) {
+    if (this.state.in !== props.in) {
+      this.setState({ in: props.in });
+    }
+  }
+
   render() {
     let upper: string = this.state.in.getTitle.toUpperCase();
     let lineColor: string = getStatusColor(this.props.in.getStatus);

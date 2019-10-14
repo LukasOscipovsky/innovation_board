@@ -31,7 +31,7 @@ const initialState = {
 }
 
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       open: false,
       title: this.props.in.getTitle,
@@ -41,9 +41,18 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     })
   }
 
-  componentWillReceiveProps(props: InnovationModalProps) {
+  UNSAFE_componentWillReceiveProps(props: InnovationModalProps) {
     if (this.state.open !== props.open) {
       this.setState({ open: props.open });
+    }
+
+    if (this.state.title !== props.in.getTitle) {
+      this.setState({
+        title: props.in.getTitle,
+        description: props.in.getDescription,
+        status: props.in.getStatus,
+        priority: props.in.getPriority
+      });
     }
   }
 

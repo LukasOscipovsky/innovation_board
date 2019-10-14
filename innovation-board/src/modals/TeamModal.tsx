@@ -19,13 +19,13 @@ const initialState = {
 }
 
 class TeamModal extends Component<TeamModalProps, TeamModalState> {
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({
             open: false
         });
     }
 
-    componentWillReceiveProps(props: TeamModalProps) {
+    UNSAFE_componentWillReceiveProps(props: TeamModalProps) {
         if (this.state.open !== props.open) {
             this.setState({ open: props.open });
         }

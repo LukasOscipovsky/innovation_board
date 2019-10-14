@@ -13,13 +13,13 @@ interface DeleteModalProps {
 }
 
 class DeleteTeamModal extends Component<DeleteModalProps, DeleteModalState> {
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({
             open: false,
         });
     }
 
-    componentWillReceiveProps(props: DeleteModalProps) {
+    UNSAFE_componentWillReceiveProps(props: DeleteModalProps) {
         if (this.state.open !== props.open) {
             this.setState({ open: props.open });
         }

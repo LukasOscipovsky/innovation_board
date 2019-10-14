@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/innovationDTO';
+import InnovationDTO from '../data/InnovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
 import DeleteTeamModal from '../modals/DeleteTeamModal';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
+import ArrowForward from '@material-ui/icons/ArrowForwardTwoTone';
+import ArrowBack from '@material-ui/icons/ArrowBackTwoTone';
 import Clear from '@material-ui/icons/Clear';
 
 interface TeamProps {
@@ -25,8 +27,10 @@ const toAdd: number = 5;
 class TeamBar extends Component<TeamProps, TeamState> {
   private index: number = 5;
   private next: number = 0;
+  private right: number = 5;
+  private left: number = 0;
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({
       innsToRender: [],
       team: this.props.team,
@@ -34,9 +38,10 @@ class TeamBar extends Component<TeamProps, TeamState> {
       deleteModalOpened: false,
     })
 
-    setInterval(() => {
-      this.setInnovationsToRender();
-    }, 5000);
+    // setInterval(() => {
+    //   this.setInnovationsToRender();
+    // }, 5000);
+    this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
   }
 
   saveTeam(innovation: InnovationDTO) {
@@ -57,6 +62,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
     saveTeam(this.props.team);
 
     this.setState({ team: this.props.team });
+    this.slice();
   }
 
   deleteInnovation(innovation: InnovationDTO) {
@@ -65,28 +71,24 @@ class TeamBar extends Component<TeamProps, TeamState> {
     saveTeam(this.props.team);
 
     this.setState({ team: this.props.team });
-  }
-
-  compsFromList() {
-    return this.state.innsToRender.map((i) => {
-      return (<Innovation triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />)
-    });
+    this.slice();
   }
 
   setInnovationsToRender() {
     if (this.props.team.getInnovations !== undefined) {
-      if (this.index >= this.props.team.getInnovations.length) {
-        this.next = 0;
-        this.index = toAdd;
-      } else {
-        this.next = this.next + toAdd;
-        this.index = this.index + toAdd;
-      }
+      // if (this.index >= this.props.team.getInnovations.length) {
+      //   this.next = 0;
+      //   this.index = toAdd;
+      // } else {
+      //   this.next = this.next + toAdd;
+      //   this.index = this.index + toAdd;
+      // }
 
-      let x = this.props.team.getInnovations.slice(this.next, this.index);
+      // let x = this.props.team.getInnovations.slice(this.next, this.index);
 
-      this.setState({ innsToRender: [] });
-      this.setState({ innsToRender: x });
+      // this.setState({ innsToRender: [] });
+      // this.setState({ innsToRender: x });
+      //this.setState({ innsToRender: this.props.team.getInnovations });
     }
   }
 
@@ -94,6 +96,50 @@ class TeamBar extends Component<TeamProps, TeamState> {
     deleteTeam(this.state.team.getUuid);
 
     this.props.triggerTeamsUpdate(this.state.team);
+  }
+
+  handleBackwards = () => {
+    if (this.props.team.getInnovations === undefined) {
+      return;
+    }
+
+    if (this.props.team.getInnovations.length < this.right || this.left === 0) {
+      return;
+    }
+
+    this.left--;
+    this.right--;
+
+    this.slice();
+  }
+
+  handleForwards = () => {
+    if (this.props.team.getInnovations === undefined) {
+      return;
+    }
+
+    if (this.props.team.getInnovations.length < this.right || this.right === this.props.team.getInnovations.length) {
+      return;
+    }
+
+    this.left++;
+    this.right++;
+
+    this.slice();
+  }
+
+  slice() {
+    let slicedInns = this.props.team.getInnovations.slice(this.left, this.right);
+
+    this.setState({
+      innsToRender: slicedInns
+    })
+  }
+
+  compsFromList() {
+    return this.state.innsToRender.map((i) => {
+      return (<Innovation key={i.getUuid} triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />);
+    })
   }
 
   render() {
@@ -119,8 +165,14 @@ class TeamBar extends Component<TeamProps, TeamState> {
               in={new InnovationDTO()} />
           </div>
         </div>
+        <div className='arrowLeft'>
+          <ArrowBack onClick={e => { this.handleBackwards() }} />
+        </div>
         <div className='innovationContainer'>
           {this.compsFromList()}
+        </div>
+        <div className='arrowRight'>
+          <ArrowForward onClick={e => { this.handleForwards() }} />
         </div>
       </div>
     );
