@@ -20,6 +20,7 @@ interface TeamState {
   team: TeamDTO;
   innModalOpened: boolean;
   deleteModalOpened: boolean;
+  width: number;
 }
 
 const toAdd: number = 5;
@@ -27,22 +28,35 @@ const toAdd: number = 5;
 class TeamBar extends Component<TeamProps, TeamState> {
   private index: number = 5;
   private next: number = 0;
-  private right: number = 5;
   private left: number = 0;
+  private right: number = 5;
+  private container: any;
 
   UNSAFE_componentWillMount() {
     this.setState({
       innsToRender: [],
       team: this.props.team,
       innModalOpened: false,
-      deleteModalOpened: false,
+      deleteModalOpened: false
     })
 
     // setInterval(() => {
     //   this.setInnovationsToRender();
     // }, 5000);
+
+    //this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+
     this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
   }
+
+  updateWindowDimensions = () => {
+    this.right = (this.container.clientWidth / 75) / 1.11;
+  };
 
   saveTeam(innovation: InnovationDTO) {
     if (this.props.team.getInnovations === undefined ||
@@ -168,7 +182,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
         <div className='arrowLeft'>
           <ArrowBack onClick={e => { this.handleBackwards() }} />
         </div>
-        <div className='innovationContainer'>
+        <div className='innovationContainer' ref={el => (this.container = el)}>
           {this.compsFromList()}
         </div>
         <div className='arrowRight'>
