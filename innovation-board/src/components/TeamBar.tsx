@@ -11,8 +11,9 @@ import ArrowBack from '@material-ui/icons/ArrowBackTwoTone';
 import Clear from '@material-ui/icons/Clear';
 
 interface TeamProps {
-  team: TeamDTO
-  triggerTeamsUpdate(team: TeamDTO): void
+  team: TeamDTO;
+  presentationEnabled: boolean;
+  triggerTeamsUpdate(team: TeamDTO): void;
 }
 
 interface TeamState {
@@ -20,6 +21,7 @@ interface TeamState {
   team: TeamDTO;
   innModalOpened: boolean;
   deleteModalOpened: boolean;
+  presentationEnabled: boolean;
   width: number;
 }
 
@@ -29,13 +31,15 @@ class TeamBar extends Component<TeamProps, TeamState> {
   private index: number = 5;
   private next: number = 0;
   private left: number = 0;
-  private right: number = 5;
+  private right: number = 0;
+  private gridSize: number = 0;
   private container: any;
 
   UNSAFE_componentWillMount() {
     this.setState({
       innsToRender: [],
       team: this.props.team,
+      presentationEnabled: this.props.presentationEnabled,
       innModalOpened: false,
       deleteModalOpened: false
     })
@@ -43,19 +47,24 @@ class TeamBar extends Component<TeamProps, TeamState> {
     // setInterval(() => {
     //   this.setInnovationsToRender();
     // }, 5000);
+  }
 
-    //this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
+  UNSAFE_componentWillReceiveProps(props: TeamProps) {
+    if (this.state.presentationEnabled !== props.presentationEnabled) {
+      this.setState({ presentationEnabled: props.presentationEnabled });
+    }
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    //window.addEventListener('resize', this.updateWindowDimensions);
 
     this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
   }
 
   updateWindowDimensions = () => {
-    this.right = (this.container.clientWidth / 75) / 1.11;
+    this.gridSize = Math.trunc((this.container.clientWidth / 75) / 1.11);
+    this.right = Math.trunc((this.container.clientWidth / 75) / 1.11);
   };
 
   saveTeam(innovation: InnovationDTO) {
@@ -76,6 +85,14 @@ class TeamBar extends Component<TeamProps, TeamState> {
     saveTeam(this.props.team);
 
     this.setState({ team: this.props.team });
+    if (this.gridSize <= this.right) {
+      this.left++;
+    }
+
+    if (this.props.team.getInnovations.length >= this.right) {
+      this.right++;
+    }
+
     this.slice();
   }
 
@@ -85,6 +102,12 @@ class TeamBar extends Component<TeamProps, TeamState> {
     saveTeam(this.props.team);
 
     this.setState({ team: this.props.team });
+    if (this.left > 0) {
+      this.left--;
+    }
+
+    this.right--;
+
     this.slice();
   }
 
@@ -152,7 +175,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
   compsFromList() {
     return this.state.innsToRender.map((i) => {
-      return (<Innovation key={i.getUuid} triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />);
+      return (<Innovation key={i.getUuid} presentationEnabled={this.state.presentationEnabled} triggerInSave={innovation => this.saveTeam(innovation)} in={i} triggerInDelete={innovation => this.deleteInnovation(innovation)} />);
     })
   }
 
@@ -163,7 +186,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       <div className='teamBar'>
         <div className='titleContainer'>
           <div className='clear'>
-            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.setState({ deleteModalOpened: true })} />
+            <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer', visibility: this.props.presentationEnabled ? 'hidden' : 'visible' }} onClick={e => this.setState({ deleteModalOpened: true })} />
             <DeleteTeamModal
               open={this.state.deleteModalOpened}
               triggerClose={() => this.setState({ deleteModalOpened: false })}
@@ -171,7 +194,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
           </div>
           <div className='title'>
             <label className='name'>{upper}</label>
-            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer' }} onClick={e => this.setState({ innModalOpened: true })} />
+            <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer', visibility: this.props.presentationEnabled ? 'hidden' : 'visible' }} onClick={e => this.setState({ innModalOpened: true })} />
             <InnovationModal
               triggerInInnovationClose={() => this.setState({ innModalOpened: false })}
               triggerInInnovationSave={innovation => { this.setState({ innModalOpened: false }); this.saveTeam(innovation) }}
@@ -179,13 +202,13 @@ class TeamBar extends Component<TeamProps, TeamState> {
               in={new InnovationDTO()} />
           </div>
         </div>
-        <div className='arrowLeft'>
+        <div className='arrowLeft' style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>
           <ArrowBack onClick={e => { this.handleBackwards() }} />
         </div>
         <div className='innovationContainer' ref={el => (this.container = el)}>
           {this.compsFromList()}
         </div>
-        <div className='arrowRight'>
+        <div className='arrowRight' style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>
           <ArrowForward onClick={e => { this.handleForwards() }} />
         </div>
       </div>

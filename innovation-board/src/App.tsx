@@ -4,6 +4,7 @@ import './App.css';
 import TeamDTO from './data/teamDTO';
 import TeamBar from './components/TeamBar';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
+import AirPlay from '@material-ui/icons/AirplayTwoTone';
 import TeamModal from './modals/TeamModal';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { saveTeam, getTeams } from './client/teamClient';
@@ -13,6 +14,7 @@ const theme = createMuiTheme();
 interface AppState {
   teams: TeamDTO[];
   modalOpened: boolean;
+  presentationEnabled: boolean;
 }
 
 export default class App extends Component<{}, AppState> {
@@ -21,6 +23,7 @@ export default class App extends Component<{}, AppState> {
     this.state = {
       modalOpened: false,
       teams: [],
+      presentationEnabled: false
     }
   }
 
@@ -60,16 +63,19 @@ export default class App extends Component<{}, AppState> {
           <img src={logo} className="appDaznLogo" alt="logo" />
           <p className="daznTitle">DAZN Košice - Innovation Board</p>
         </header>
-        <div className="createTeam">
+        <div className="createTeam" style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>
           <div className="team">
             <label className="add">Create Team</label>
             <AddBox style={{ width: 30, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true })} />
             <TeamModal triggerInTeamSave={team => { this.setState({ modalOpened: false }); this.addNewTeam(team) }} open={this.state.modalOpened} />
           </div>
         </div>
+        <div className="presentationMode">
+          <AirPlay onClick={e => this.setState({ presentationEnabled: !this.state.presentationEnabled })} />
+        </div>
         <MuiThemeProvider theme={theme}>
           <div className="teams">
-            {this.state.teams.map(t => <TeamBar key={t.getUuid} team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}
+            {this.state.teams.map(t => <TeamBar key={t.getUuid} presentationEnabled={this.state.presentationEnabled} team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}
           </div>
         </MuiThemeProvider>
       </div>

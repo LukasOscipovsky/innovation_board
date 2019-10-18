@@ -8,6 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 interface IProps {
   in: InnovationDTO;
+  presentationEnabled: boolean;
   triggerInSave(innovation: InnovationDTO): void
   triggerInDelete(innovation: InnovationDTO): void
 }
@@ -15,6 +16,7 @@ interface IProps {
 interface IState {
   in: InnovationDTO;
   open: boolean;
+  presentationEnabled: boolean;
 }
 
 class Innovation extends Component<IProps, IState> {
@@ -23,13 +25,17 @@ class Innovation extends Component<IProps, IState> {
 
     this.state = {
       in: this.props.in,
-      open: false
+      open: false,
+      presentationEnabled: false
     }
   }
 
   UNSAFE_componentWillReceiveProps(props: IProps) {
     if (this.state.in !== props.in) {
       this.setState({ in: props.in });
+    }
+    if (this.state.presentationEnabled !== props.presentationEnabled) {
+      this.setState({ presentationEnabled: props.presentationEnabled });
     }
   }
 
@@ -40,7 +46,7 @@ class Innovation extends Component<IProps, IState> {
     return (
       <div className='innovation'>
         <div className='clear'>
-          <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer' }} onClick={e => this.props.triggerInDelete(this.state.in)} />
+          <Clear style={{ color: '#FF4136', width: 15, cursor: 'pointer', visibility: this.props.presentationEnabled ? 'hidden' : 'visible' }} onClick={e => this.props.triggerInDelete(this.state.in)} />
         </div>
         <Tooltip title={this.state.in.getTitle}>
           <div className='title-container'>
@@ -48,7 +54,7 @@ class Innovation extends Component<IProps, IState> {
             <InnovationModal
               triggerInInnovationClose={() => this.setState({ open: false })}
               triggerInInnovationSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }}
-              open={this.state.open}
+              open={this.state.open && !this.state.presentationEnabled}
               in={this.state.in} />
           </div>
         </Tooltip>
