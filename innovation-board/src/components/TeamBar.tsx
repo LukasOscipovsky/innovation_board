@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
 import DeleteTeamModal from '../modals/DeleteTeamModal';
@@ -25,15 +25,16 @@ interface TeamState {
   width: number;
 }
 
-const toAdd: number = 5;
+const innSize = 75;
+const gap = 8
 
 class TeamBar extends Component<TeamProps, TeamState> {
-  private index: number = 5;
   private next: number = 0;
   private left: number = 0;
   private right: number = 0;
   private gridSize: number = 0;
   private container: any;
+  private interval: any;
 
   UNSAFE_componentWillMount() {
     this.setState({
@@ -43,28 +44,41 @@ class TeamBar extends Component<TeamProps, TeamState> {
       innModalOpened: false,
       deleteModalOpened: false
     })
-
-    // setInterval(() => {
-    //   this.setInnovationsToRender();
-    // }, 5000);
   }
 
   UNSAFE_componentWillReceiveProps(props: TeamProps) {
     if (this.state.presentationEnabled !== props.presentationEnabled) {
       this.setState({ presentationEnabled: props.presentationEnabled });
+      this.setMode(props.presentationEnabled);
     }
   }
 
   componentDidMount() {
+    this.setMode(false);
+  }
+
+  setMode(presentationEnabled: boolean) {
+    if (presentationEnabled) {
+      this.updateWindowDimensions();
+
+      this.interval = setInterval(() => {
+        this.setInnovationsToRender();
+      }, 5000);
+      return;
+    }
+
+    clearInterval(this.interval);
+
     this.updateWindowDimensions();
     //window.addEventListener('resize', this.updateWindowDimensions);
 
-    this.setState({ innsToRender: this.props.team.getInnovations.slice(this.left, this.right) });
+    this.setState({ innsToRender: this.props.team.getInnovations.slice(0, this.gridSize) });
   }
 
   updateWindowDimensions = () => {
-    this.gridSize = Math.trunc((this.container.clientWidth / 75) / 1.11);
-    this.right = Math.trunc((this.container.clientWidth / 75) / 1.11);
+    this.gridSize = Math.trunc((this.container.clientWidth / innSize) / (1 + gap / innSize));
+    this.right = this.gridSize;
+    this.left = 0;
   };
 
   saveTeam(innovation: InnovationDTO) {
@@ -86,11 +100,15 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
     this.setState({ team: this.props.team });
     if (this.gridSize <= this.right) {
-      this.left++;
+      if (this.props.team.getInnovations.length > this.gridSize) {
+        this.left = this.props.team.getInnovations.length - this.gridSize;
+      } else {
+        this.left = 0;
+      }
     }
 
     if (this.props.team.getInnovations.length >= this.right) {
-      this.right++;
+      this.right = this.props.team.getInnovations.length;
     }
 
     this.slice();
@@ -106,26 +124,26 @@ class TeamBar extends Component<TeamProps, TeamState> {
       this.left--;
     }
 
-    this.right--;
+    if (this.gridSize < this.right) {
+      this.right--;
+    }
+
 
     this.slice();
   }
 
   setInnovationsToRender() {
+    let temp: number = 0;
+
     if (this.props.team.getInnovations !== undefined) {
-      // if (this.index >= this.props.team.getInnovations.length) {
-      //   this.next = 0;
-      //   this.index = toAdd;
-      // } else {
-      //   this.next = this.next + toAdd;
-      //   this.index = this.index + toAdd;
-      // }
+      if (this.next > this.props.team.getInnovations.length) {
+        this.next = 0;
+      }
+      temp = this.next;
+      this.next = this.next + this.gridSize;
 
-      // let x = this.props.team.getInnovations.slice(this.next, this.index);
-
-      // this.setState({ innsToRender: [] });
-      // this.setState({ innsToRender: x });
-      //this.setState({ innsToRender: this.props.team.getInnovations });
+      let presentationInns = this.props.team.getInnovations.slice(temp, this.next);
+      this.setState({ innsToRender: presentationInns });
     }
   }
 
@@ -205,7 +223,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
         <div className='arrowLeft' style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>
           <ArrowBack onClick={e => { this.handleBackwards() }} />
         </div>
-        <div className='innovationContainer' ref={el => (this.container = el)}>
+        <div className='innovationContainer' style={{ gridGap: gap, gridTemplateColumns: `repeat(auto-fill, minmax(${innSize}px, 1fr))` }} ref={el => (this.container = el)}>
           {this.compsFromList()}
         </div>
         <div className='arrowRight' style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>

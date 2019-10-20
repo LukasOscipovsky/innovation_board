@@ -50,11 +50,11 @@ class Innovation extends Component<IProps, IState> {
         </div>
         <Tooltip title={this.state.in.getTitle}>
           <div className='title-container'>
-            <label className='title' onClick={e => this.setState({ open: true })}>{upper}</label>
+            <label className='title' onClick={e => this.setState({ open: !this.props.presentationEnabled })}>{upper}</label>
             <InnovationModal
               triggerInInnovationClose={() => this.setState({ open: false })}
               triggerInInnovationSave={innovation => { this.setState({ open: false }); this.props.triggerInSave(innovation) }}
-              open={this.state.open && !this.state.presentationEnabled}
+              open={this.state.open}
               in={this.state.in} />
           </div>
         </Tooltip>

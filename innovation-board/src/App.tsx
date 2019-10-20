@@ -5,6 +5,7 @@ import TeamDTO from './data/teamDTO';
 import TeamBar from './components/TeamBar';
 import AddBox from '@material-ui/icons/AddBoxTwoTone';
 import AirPlay from '@material-ui/icons/AirplayTwoTone';
+import CancelPresentation from '@material-ui/icons/CancelPresentationTwoTone';
 import TeamModal from './modals/TeamModal';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { saveTeam, getTeams } from './client/teamClient';
@@ -57,6 +58,18 @@ export default class App extends Component<{}, AppState> {
   }
 
   render() {
+    let renderPresentation;
+
+    if (!this.state.presentationEnabled) {
+      renderPresentation = <div className="presentationMode">
+        <AirPlay style={{ padding: 5 }} onClick={e => this.setState({ presentationEnabled: !this.state.presentationEnabled })} />
+      </div>
+    } else {
+      renderPresentation = <div className="presentationMode">
+        <CancelPresentation style={{ padding: 5 }} onClick={e => this.setState({ presentationEnabled: !this.state.presentationEnabled })} />
+      </div>
+    }
+
     return (
       <div className="app">
         <header className="boardHeader">
@@ -70,9 +83,7 @@ export default class App extends Component<{}, AppState> {
             <TeamModal triggerInTeamSave={team => { this.setState({ modalOpened: false }); this.addNewTeam(team) }} open={this.state.modalOpened} />
           </div>
         </div>
-        <div className="presentationMode">
-          <AirPlay onClick={e => this.setState({ presentationEnabled: !this.state.presentationEnabled })} />
-        </div>
+        {renderPresentation}
         <MuiThemeProvider theme={theme}>
           <div className="teams">
             {this.state.teams.map(t => <TeamBar key={t.getUuid} presentationEnabled={this.state.presentationEnabled} team={t} triggerTeamsUpdate={team => this.deleteTeam(team)} />)}

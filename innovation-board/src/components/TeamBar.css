@@ -1,7 +1,6 @@
 @import './Innovation.css';
 @import '../modals/InnovationModal.css';
 @import '../modals/DeleteTeamModal.css';
-
 .teamBar {
     padding: 5px;
     height: 8vh;
@@ -78,7 +77,5 @@
     /* Supports Grid */
     display: grid;
     overflow: hidden;
-    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
     grid-auto-rows: minmax(0vh, auto);
-    grid-gap: 8px;
 }
