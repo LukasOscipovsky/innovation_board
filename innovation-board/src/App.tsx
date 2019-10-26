@@ -35,6 +35,10 @@ export default class App extends Component<{}, AppState> {
   }
 
   addNewTeam(team: TeamDTO) {
+    if (team.getTeamName === null || team.getTeamName === '') {
+      return;
+    }
+
     saveTeam(team);
 
     this.setState(state => {
@@ -79,8 +83,8 @@ export default class App extends Component<{}, AppState> {
         <div className="createTeam" style={{ visibility: this.state.presentationEnabled ? 'hidden' : 'visible' }}>
           <div className="team">
             <label className="add">Create Team</label>
-            <AddBox style={{ width: 30, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: true })} />
-            <TeamModal triggerInTeamSave={team => { this.setState({ modalOpened: false }); this.addNewTeam(team) }} open={this.state.modalOpened} />
+            <AddBox style={{ width: 30, cursor: 'pointer' }} onClick={e => this.setState({ modalOpened: !this.state.presentationEnabled })} />
+            <TeamModal triggerInTeamClose={() => this.setState({ modalOpened: false })} triggerInTeamSave={team => { this.setState({ modalOpened: false }); this.addNewTeam(team) }} open={this.state.modalOpened} />
           </div>
         </div>
         {renderPresentation}

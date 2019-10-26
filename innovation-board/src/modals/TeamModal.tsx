@@ -12,6 +12,7 @@ interface TeamModalState {
 interface TeamModalProps {
     open: boolean;
     triggerInTeamSave(team: TeamDTO): void
+    triggerInTeamClose(): void
 }
 
 const initialState = {
@@ -33,6 +34,8 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
 
     handleClose = () => {
         this.setState({ open: false });
+
+        this.props.triggerInTeamClose();
     };
 
     handleSave = () => {

@@ -72,7 +72,6 @@
   justify-content: center;
   width: 14vh;
   padding: 5px;
-  box-shadow: 2px 3px 8px #000000;
 }
 
 .app .createTeam .team .add {
@@ -90,8 +89,15 @@
   flex-direction: row;
   margin-right: 10px;
   margin-top: 10px;
-  box-shadow: 1px 2px 4px #000000;
   border-radius: 2px;
+}
+
+.app .presentationMode:hover, .app .createTeam:hover {
+  opacity: 0.8;
+}
+
+.app .presentationMode:active, .app .createTeam:active {
+  box-shadow: 1px 2px 4px #000000;
 }
 
 @font-face {
