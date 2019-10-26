@@ -49,9 +49,9 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
                 open={this.state.open}
                 onClose={this.handleClose}
             >
-                <div className="InnovationModal" >
-                    <label className="ModalTitle" >NEW TEAM</label>
-                    <div className="TextFieldDiv" >
+                <div className="modal" >
+                    <label className="title" >NEW TEAM</label>
+                    <div className="textField" >
                         <TextField
                             required
                             label="TeamName"
@@ -65,7 +65,7 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
                             fullWidth={true}
                         />
                     </div>
-                    <div className="ModalActions">
+                    <div className="action">
                         <Button
                             style={{ backgroundColor: '#242d34', marginRight: 20, color: '#f8fc00', fontFamily: 'Trim,DAZN-Bold,Oscine' }}
                             onClick={this.handleSave}>

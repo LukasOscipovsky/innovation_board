@@ -1,24 +1,4 @@
-.ModalTitle {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: bold;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.ModalActions {
-    display: flex;
-    flex-direction: row;
-    margin-top: 25px;
-}
-
-.TextFieldDiv {
-    width: 90%;
-}
-
-.InnovationModal {
+.modal {
     background: white;
     display: flex;
     flex-direction: column;
@@ -30,4 +10,24 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.modal .title {
+    font-family: Trim, 'DAZN-Bold', Oscine;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #242d34;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.modal .action {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+.modal .textField {
+    width: 90%;
 }

@@ -75,9 +75,9 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
         open={this.state.open}
         onClose={this.handleClose}
       >
-        <div className="InnovationModal" >
-          <label className="ModalTitle" >INNOVATION</label>
-          <div className="TextFieldDiv" >
+        <div className="modal" >
+          <label className="title" >INNOVATION</label>
+          <div className="textField" >
             <TextField
               required
               label="InnovationTitle"
@@ -91,7 +91,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
               fullWidth={true}
             />
           </div>
-          <div className="TextFieldDiv" >
+          <div className="textField" >
             <TextField
               required
               label="Innovation Description"
@@ -107,8 +107,9 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
               rowsMax={10} >
             </TextField>
           </div>
-          <div className="SelectBoxes">
-            <FormControl variant="outlined">
+          <div className="select">
+            <FormControl variant="outlined"
+              style={{ marginLeft: 20, marginRight: 20, width: 120, background: 'white' }}>
               <InputLabel htmlFor="outlined-status-simple">
                 Status
             </InputLabel>
@@ -116,7 +117,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
                 value={this.state.status}
                 variant="outlined"
                 onChange={event => this.setState({ status: parseInt(event.target.value) })}
-                style={{ width: 120, marginRight: 30 }}
+                style={{ width: 120 }}
                 inputProps={{
                   name: 'status',
                   id: 'outlined-status-simple',
@@ -127,18 +128,18 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
                 <MenuItem value={2}>Done</MenuItem>
               </Select>
             </FormControl>
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="outlined-status-simple">
+            <FormControl variant="outlined" style={{ marginLeft: 20, marginRight: 20, width: 120, background: 'white' }}>
+              <InputLabel htmlFor="outlined-priority-simple">
                 Priority
             </InputLabel>
               <Select
                 value={this.state.priority}
                 variant="outlined"
                 onChange={event => this.setState({ priority: parseInt(event.target.value) })}
-                style={{ width: 120, marginLeft: 30 }}
+                style={{ width: 120 }}
                 inputProps={{
                   name: 'priority',
-                  id: 'outlined-status-simple',
+                  id: 'outlined-priority-simple',
                 }}
               >
                 <MenuItem value={0}>Low</MenuItem>
@@ -147,7 +148,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
               </Select>
             </FormControl>
           </div>
-          <div className="ModalActions">
+          <div className="action">
             <Button
               style={{ backgroundColor: '#242d34', marginRight: 20, color: '#f8fc00', fontFamily: 'Trim,DAZN-Bold,Oscine' }}
               onClick={this.handleSave}>

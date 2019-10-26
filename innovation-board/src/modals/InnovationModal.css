@@ -1,32 +1,4 @@
-.ModalTitle {
-    font-family: Trim,'DAZN-Bold',Oscine;
-    font-style: bold;
-    font-weight: 700;
-    font-size: 20px;
-    color: #242d34;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.InnovationTitle {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.InnovationDescription {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.ModalActions {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-}
-
-.InnovationModal {
+.modal {
     background: white;
     display: flex;
     flex-direction: column;
@@ -40,30 +12,32 @@
     transform: translate(-50%, -50%);
 }
 
-.InnovationTitle {
-    width: 100%;
+.modal .title {
+    font-family: Trim, 'DAZN-Bold', Oscine;
+    font-style: bold;
+    font-weight: 700;
+    font-size: 20px;
+    color: #242d34;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.InnovationDescription {
-    padding: 10px;
-    margin-bottom: 10px;
+.modal .textField {
+    width: 90%;
+    margin: 10;
 }
 
-.ModalActions {
+.modal .select {
     display: flex;
     flex-direction: row;
-    margin-top: 25px;
-}
-
-.TextFieldDiv {
-    width: 90%;
-}
-
-.SelectBoxes {
-    display:flex;
-    flex-direction: row;
-    padding: 15px;
+    margin: 25px;
     align-items: center;
+}
+
+.modal .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
 }
