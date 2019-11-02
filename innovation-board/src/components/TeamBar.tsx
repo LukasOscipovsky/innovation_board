@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Innovation from './Innovation';
 import TeamDTO from '../data/teamDTO';
-import InnovationDTO from '../data/InnovationDTO';
+import InnovationDTO from '../data/innovationDTO';
 import { saveTeam, deleteTeam } from '../client/teamClient';
 import InnovationModal from '../modals/InnovationModal';
 import DeleteTeamModal from '../modals/DeleteTeamModal';
@@ -9,6 +9,8 @@ import AddBox from '@material-ui/icons/AddBoxTwoTone';
 import ArrowForward from '@material-ui/icons/ArrowForwardTwoTone';
 import ArrowBack from '@material-ui/icons/ArrowBackTwoTone';
 import Clear from '@material-ui/icons/Clear';
+import InputBase from '@material-ui/core/InputBase';
+import { properties } from '../properties';
 
 interface TeamProps {
   team: TeamDTO;
@@ -42,7 +44,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
       team: this.props.team,
       presentationEnabled: this.props.presentationEnabled,
       innModalOpened: false,
-      deleteModalOpened: false
+      deleteModalOpened: false,
     })
   }
 
@@ -63,7 +65,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
       this.interval = setInterval(() => {
         this.setInnovationsToRender();
-      }, 5000);
+      }, properties.innRenderInterval);
       return;
     }
 
@@ -99,6 +101,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
     saveTeam(this.props.team);
 
     this.setState({ team: this.props.team });
+
     if (this.gridSize <= this.right) {
       if (this.props.team.getInnovations.length > this.gridSize) {
         this.left = this.props.team.getInnovations.length - this.gridSize;
@@ -112,6 +115,18 @@ class TeamBar extends Component<TeamProps, TeamState> {
     }
 
     this.slice();
+  }
+
+  changeTeamName(name: string) {
+    this.setState(state => {
+      let updatedTeam: TeamDTO = this.state.team;
+      updatedTeam.setTeamName = name;
+
+      return {
+        team: updatedTeam
+      }
+    })
+    saveTeam(this.state.team);
   }
 
   deleteInnovation(innovation: InnovationDTO) {
@@ -211,7 +226,12 @@ class TeamBar extends Component<TeamProps, TeamState> {
               triggerDelete={() => { this.setState({ deleteModalOpened: false }); this.deleteTeam() }} />
           </div>
           <div className='title'>
-            <label className='name'>{upper}</label>
+            <InputBase
+              disabled={this.state.presentationEnabled}
+              onChange={event => this.changeTeamName(event.target.value)}
+              style={{ fontFamily: 'DAZN-Bold', fontStyle: 'italic', fontWeight: 700, fontSize: 18, color: '#242d34', marginLeft: 10, marginRight: 2 }}
+              defaultValue={upper}
+            />
             <AddBox style={{ width: 30, paddingRight: 10, cursor: 'pointer', visibility: this.props.presentationEnabled ? 'hidden' : 'visible' }} onClick={e => this.setState({ innModalOpened: true })} />
             <InnovationModal
               triggerInInnovationClose={() => this.setState({ innModalOpened: false })}

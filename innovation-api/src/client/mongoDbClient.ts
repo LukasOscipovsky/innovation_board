@@ -1,6 +1,8 @@
 import mongo = require('mongodb')
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./src/app.file');
 
-const url: string = 'mongodb://172.18.0.1:2222';
+const url: string = properties.get('mongo.client');
 const mongoClient = mongo.MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 export async function getMongoConnection() { return await mongoClient; } 4

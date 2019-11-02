@@ -3,9 +3,11 @@ import cors = require('cors');
 import InnovationClient from './client/innovationClient'
 import TeamDTO from './data/teamDTO';
 import { getJsonConverter } from './mapper/jsonConverter';
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./src/app.file');
 
 const app = express();
-const port = 8080;
+const port = properties.get('app.port');
 
 const client = new InnovationClient();
 
@@ -35,7 +37,7 @@ app.get('/team/:teamName', (req, res) => {
 }).put('/team', (req, res) => {
   let team: TeamDTO = getJsonConverter().deserializeObject(req.body, TeamDTO);
 
-  console.log('Received request to create team');
+  console.log('Received request to create or update team');
 
   client.createTeam(team);
   res.send('Team created/updated');
