@@ -27,8 +27,8 @@ interface TeamState {
   width: number;
 }
 
-const innSize = 75;
-const gap = 8
+const innSize: number = 75;
+const gap: number = 8;
 
 class TeamBar extends Component<TeamProps, TeamState> {
   private next: number = 0;
@@ -39,6 +39,8 @@ class TeamBar extends Component<TeamProps, TeamState> {
   private interval: any;
 
   UNSAFE_componentWillMount() {
+    window.addEventListener('resize', this.updateWindowDimensions);
+
     this.setState({
       innsToRender: [],
       team: this.props.team,
@@ -72,7 +74,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
     clearInterval(this.interval);
 
     this.updateWindowDimensions();
-    //window.addEventListener('resize', this.updateWindowDimensions);
 
     this.setState({ innsToRender: this.props.team.getInnovations.slice(0, this.gridSize) });
   }
@@ -81,6 +82,8 @@ class TeamBar extends Component<TeamProps, TeamState> {
     this.gridSize = Math.trunc((this.container.clientWidth / innSize) / (1 + gap / innSize));
     this.right = this.gridSize;
     this.left = 0;
+
+    this.slice();
   };
 
   saveTeam(innovation: InnovationDTO) {
@@ -102,18 +105,6 @@ class TeamBar extends Component<TeamProps, TeamState> {
 
     this.setState({ team: this.props.team });
 
-    if (this.gridSize <= this.right) {
-      if (this.props.team.getInnovations.length > this.gridSize) {
-        this.left = this.props.team.getInnovations.length - this.gridSize;
-      } else {
-        this.left = 0;
-      }
-    }
-
-    if (this.props.team.getInnovations.length >= this.right) {
-      this.right = this.props.team.getInnovations.length;
-    }
-
     this.slice();
   }
 
@@ -126,6 +117,7 @@ class TeamBar extends Component<TeamProps, TeamState> {
         team: updatedTeam
       }
     })
+
     saveTeam(this.state.team);
   }
 
