@@ -1,2 +1,2 @@
-mongo.client = mongodb://localhost:27017
+mongo.client = mongodb://172.18.0.1:2222
 app.port=8080
