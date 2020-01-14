@@ -7,6 +7,8 @@ import TeamDTO from '../data/teamDTO';
 interface TeamModalState {
     open: boolean;
     name: string;
+    nameErrorState: boolean;
+    nameErrorStateText: string;
 }
 
 interface TeamModalProps {
@@ -16,13 +18,20 @@ interface TeamModalProps {
 }
 
 const initialState = {
-    name: ''
+    open: false,
+    name: '',
+    nameErrorState: false,
+    nameErrorStateText: ''
 }
+
+const nameErrorText = 'Team Name is required'
 
 class TeamModal extends Component<TeamModalProps, TeamModalState> {
     UNSAFE_componentWillMount() {
         this.setState({
-            open: false
+            open: false,
+            nameErrorState: false,
+            nameErrorStateText: ''
         });
     }
 
@@ -33,12 +42,20 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
     }
 
     handleClose = () => {
-        this.setState({ open: false });
-
         this.props.triggerInTeamClose();
+        this.setState(initialState);
     };
 
     handleSave = () => {
+        if (this.state.nameErrorState || this.state.name.length === 0) {
+            this.setState({
+                nameErrorState: true,
+                nameErrorStateText: nameErrorText,
+            })
+            return
+        }
+
+
         let team: TeamDTO = new TeamDTO();
         team.setTeamName = this.state.name;
         team.setInnovations = [];
@@ -58,9 +75,15 @@ class TeamModal extends Component<TeamModalProps, TeamModalState> {
                         <TextField
                             required
                             label="TeamName"
-                            onChange={event => this.setState({ name: event.currentTarget.value })}
+                            onChange={event => this.setState({
+                                name: event.currentTarget.value,
+                                nameErrorState: event.currentTarget.value.length <= 0,
+                                nameErrorStateText: event.currentTarget.value.length > 0 ? '' : nameErrorText
+                            })}
                             placeholder="Team Name"
                             variant="outlined"
+                            error={this.state.nameErrorState}
+                            helperText={this.state.nameErrorStateText}
                             style={{ fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black' }
                             }
                             margin="normal"

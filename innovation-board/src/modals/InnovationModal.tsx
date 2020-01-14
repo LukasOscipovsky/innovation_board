@@ -15,9 +15,9 @@ interface InnovationModalState {
   status: number;
   priority: number;
   titleErrorState: boolean;
-  titleErrorText: string;
+  titleErrorTextState: string;
   descriptionErrorState: boolean;
-  descriptionErrorText: string;
+  descriptionErrorTextState: string;
 }
 
 interface InnovationModalProps {
@@ -33,10 +33,13 @@ const initialState = {
   status: 0,
   priority: 0,
   titleErrorState: false,
-  titleErrorText: '',
+  titleErrorTextState: '',
   descriptionErrorState: false,
-  descriptionErrorText: ''
+  descriptionErrorTextState: ''
 }
+
+const titleErrorText = 'Title is required'
+const descriptionErrorText = 'Description is required'
 
 class InnovationModal extends Component<InnovationModalProps, InnovationModalState> {
   UNSAFE_componentWillMount() {
@@ -47,9 +50,9 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
       status: this.props.in.getStatus,
       priority: this.props.in.getPriority,
       titleErrorState: false,
-      titleErrorText: '',
+      titleErrorTextState: '',
       descriptionErrorState: false,
-      descriptionErrorText: ''
+      descriptionErrorTextState: ''
     })
   }
 
@@ -69,6 +72,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
   }
 
   handleClose = () => {
+    this.setState(initialState);
     this.props.triggerInInnovationClose();
   };
 
@@ -78,17 +82,25 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
     this.props.in.setStatus = this.state.status;
     this.props.in.setPriority = this.state.priority;
 
-    if (this.state.titleErrorState
-      || this.state.descriptionErrorState
-      || this.state.title.length === 0
-      || this.state.description.length === 0) {
+    var titleErrorState: boolean = this.state.titleErrorState || this.state.title.length === 0
+    var descriptionErrorState: boolean = this.state.descriptionErrorState || this.state.description.length === 0
+
+    if (titleErrorState) {
       this.setState({
         titleErrorState: true,
-        titleErrorText: 'Title not inserted',
-        descriptionErrorState: true,
-        descriptionErrorText: 'Description not inserted'
+        titleErrorTextState: titleErrorText,
       })
-      return;
+    }
+
+    if (descriptionErrorState) {
+      this.setState({
+        descriptionErrorState: true,
+        descriptionErrorTextState: descriptionErrorText
+      })
+    }
+
+    if (titleErrorState || descriptionErrorState) {
+      return
     }
 
     this.props.triggerInInnovationSave(this.props.in);
@@ -107,14 +119,18 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
             <TextField
               required
               label="InnovationTitle"
-              onChange={event => this.setState({ title: event.currentTarget.value, titleErrorState: event.currentTarget.value.length <= 0 })}
+              onChange={event => this.setState({
+                title: event.currentTarget.value,
+                titleErrorState: event.currentTarget.value.length <= 0,
+                titleErrorTextState: event.currentTarget.value.length > 0 ? '' : titleErrorText
+              })}
               placeholder="Innovation Title"
               variant="outlined"
               style={{ fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black' }
               }
               margin="normal"
               error={this.state.titleErrorState}
-              helperText={this.state.titleErrorText}
+              helperText={this.state.titleErrorTextState}
               value={this.state.title}
               fullWidth={true}
             />
@@ -123,13 +139,17 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
             <TextField
               required
               label="Innovation Description"
-              onChange={event => this.setState({ description: event.currentTarget.value, descriptionErrorState: event.currentTarget.value.length <= 0 })}
+              onChange={event => this.setState({
+                description: event.currentTarget.value,
+                descriptionErrorState: event.currentTarget.value.length <= 0,
+                descriptionErrorTextState: event.currentTarget.value.length > 0 ? '' : descriptionErrorText
+              })}
               style={{ fontFamily: 'Trim,DAZN-Bold,Oscine', outlineColor: 'black' }}
               placeholder="Innovation Description"
               variant="outlined"
               multiline={true}
               error={this.state.descriptionErrorState}
-              helperText={this.state.descriptionErrorText}
+              helperText={this.state.descriptionErrorTextState}
               value={this.state.description}
               fullWidth
               margin="normal"
@@ -156,6 +176,7 @@ class InnovationModal extends Component<InnovationModalProps, InnovationModalSta
                 <MenuItem value={0}>Planned</MenuItem>
                 <MenuItem value={1}>In Progress</MenuItem>
                 <MenuItem value={2}>Done</MenuItem>
+                <MenuItem value={3}>Canceled</MenuItem>
               </Select>
             </FormControl>
             <FormControl variant="outlined" style={{ marginLeft: 20, marginRight: 20, width: 120, background: 'white' }}>
