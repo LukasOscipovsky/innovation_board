@@ -17,6 +17,8 @@
     flex-direction: column;
     width: 250px;
     height: 8vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
     box-shadow: 2px 3px 8px #000000;
 }
 
